@@ -1,0 +1,200 @@
+/*
+* Header
+*/
+.header {
+  border-bottom: 1px solid #e5e5e5;
+}    
+
+.navbar {
+  margin-bottom: 0;
+  padding: 5px 0;
+}
+
+.navbar-default {
+  background-color: transparent;
+}
+
+.navbar-default .navbar-brand {
+  color: #555555;
+}
+
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+  color: #428BCA;
+}
+
+.navbar-default .navbar-nav > li > a {
+  color: #555555;
+}
+
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+  color: #428BCA;
+  background-color: transparent;
+}
+
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+  color: #428BCA;
+  background-color: transparent;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #aaa;
+}
+
+.navbar-default .navbar-toggle:hover .icon-bar {
+  background-color: #bbb;
+}
+
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+  color: #428BCA;
+  background-color: transparent;
+}
+
+.navbar-default .dropdown-menu {
+  background-color: #fff;
+}
+.navbar-default .dropdown-menu > li > a,
+.navbar-default .dropdown-menu > li > a:focus {
+  color: #555555;
+}
+.navbar-default .dropdown-menu > li > a:hover,
+.navbar-default .dropdown-menu > .active > a,
+.navbar-default .dropdown-menu > .active > a:hover {
+  color: #428BCA;
+  background-color: transparent;
+}
+
+/*
+* Content
+*/
+.content {
+  padding: 10px;
+}
+
+.alert {
+	margin: 5px 0;
+}
+
+.alert ul {
+	padding-left: 10px;
+}
+
+/*
+* Lists
+*/
+.list {
+  padding: 17px 0 13px 0;
+	border-top: 1px solid #e5e5e5;
+}
+
+.list:first-child {
+	padding-top: 10px;
+  border: 0 !important;
+}
+
+.list:last-child {
+  padding-bottom: 10px;
+}
+
+.list .label {
+  padding: 0.1em 0.5em;
+  font-weight: 400;   
+  vertical-align: bottom;
+}
+
+.list h5 {
+  margin: 0;
+  line-height: 1;
+}
+
+.list h5 a {
+  text-decoration: none;
+}
+
+.list p {
+  margin: 7px 0 0 0;
+}
+
+.list-actions {
+  line-height: 1;
+}
+
+.list-actions a {
+  padding-left: 5px;
+  display: none;
+}
+
+.list:hover .list-actions a {
+  display: inline-block;
+}
+
+.list-actions .badge {
+  margin-left: 10px;
+}
+
+.bootstrap-dialog .modal-header {
+  -webkit-border-radius: 0; 
+  -moz-border-radius: 0; 
+  border-radius: 0; 
+}
+
+.pagination {
+  margin: 0 0 20px 0;
+  float: right;
+}
+
+/*
+* Note form
+*/
+.add-note-form {
+  padding: 10px 0;
+}
+
+.form-horizontal .control-label:first-child {
+  text-align: left;
+}
+
+.ui-timepicker-div .ui-widget-header { margin-bottom: 8px; }
+.ui-timepicker-div dl { text-align: left; }
+.ui-timepicker-div dl dt { float: left; clear:left; padding: 0 0 0 5px; }
+.ui-timepicker-div dl dd { margin: 0 10px 10px 45%; }
+.ui-timepicker-div td { font-size: 90%; }
+.ui-tpicker-grid-label { background: none; border: none; margin: 0; padding: 0; }
+
+.ui-widget {
+	font-size: 0.8em;
+	line-height: 1;
+}
+
+.ui-datepicker {
+	width: auto;
+}
+
+/*
+* Footer
+*/
+.footer {
+  padding: 20px 10px;
+  color: #777;
+  border-top: 1px solid #e5e5e5;
+}
+
+.footer p {
+  margin: 0;
+  font-size: 0.9em;
+}
+
+.footer a {
+  color: #666666;
+}
+
+@media (min-width: 992px) {
+  .container-fluid {
+    max-width: 950px;
+  }
+}

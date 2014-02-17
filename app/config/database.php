@@ -55,7 +55,7 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'msproject',
+			'database'  => 'laravel_planner',
 			'username'  => 'root',
 			'password'  => '',
 			'charset'   => 'utf8',

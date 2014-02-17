@@ -2,6 +2,20 @@
 
 class NoteController extends \BaseController {
 
+  protected $category;
+  protected $note;
+
+  /**
+  * Inject the models.
+  * @param Note $note
+  * @param Category $category  
+  */
+  public function __construct(Note $note, Category $category)
+  {
+    $this->note = $note;
+    $this->category = $category;
+  }
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -9,18 +23,10 @@ class NoteController extends \BaseController {
 	 */
 	public function index()
 	{
-    $categories = DB::table('categories')       
-                  ->leftJoin('notes', 'categories.id', '=', 'notes.category')
-                  ->select(DB::raw('categories.id, name, count(notes.id) as notes'))
-                  ->orderBy('name', 'ASC')
-                  ->groupBy('categories.id')
-                  ->get();
-                  
-    $notes = DB::table('notes')       
-                  ->leftJoin('categories', 'notes.category', '=', 'categories.id')
-                  ->select('notes.id', 'title', 'text', 'priority', 'finished', 'notes.created_at', 'deadline', 'name')
-                  ->paginate(20);
-        
+    $categories = $this->category->get_categories_menu();
+    
+    $notes = $this->note->get_notes_list(20);
+                                         
 		foreach ($notes as &$note)
 		{
 			$note->deadline = date("d.m.Y H:i", strtotime($note->deadline));
@@ -36,15 +42,10 @@ class NoteController extends \BaseController {
 	 */
 	public function create()
 	{
-    $categories = DB::table('categories')       
-                  ->leftJoin('notes', 'categories.id', '=', 'notes.category')
-                  ->select(DB::raw('categories.id, name, count(notes.id) as notes'))
-                  ->orderBy('name', 'ASC')
-                  ->groupBy('categories.id')
-                  ->get();
+    $categories = $this->category->get_categories_menu();
     
-		$categories_select = array('' => '') + Category::orderBy('name', 'ASC')->get()->lists('name', 'id');
-
+    $categories_select = $this->category->get_categories_select();
+    
     return View::make('notes.create')->with('categories', $categories)->with('categories_select', $categories_select);
 	}
 
@@ -65,7 +66,7 @@ class NoteController extends \BaseController {
 		$validator = Validator::make(Input::all(), $rules);
     
     if ($validator->fails())
-    {
+    {                   
 			return Redirect::to('notes/create')->withErrors($validator)->withInput();
 		}
     else
@@ -95,16 +96,11 @@ class NoteController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		$note = Note::find($id);     
+		$note = Note::find($id); 
     
-    $categories = DB::table('categories')       
-                  ->leftJoin('notes', 'categories.id', '=', 'notes.category')
-                  ->select(DB::raw('categories.id, name, count(notes.id) as notes'))
-                  ->orderBy('name', 'ASC')
-                  ->groupBy('categories.id')
-                  ->get();
+    $categories = $this->category->get_categories_menu();    
     
-		$categories_select = array('' => '') + Category::orderBy('name', 'ASC')->get()->lists('name', 'id');
+    $categories_select = $this->category->get_categories_select();
 
 		return View::make('notes.edit')->with('note', $note)->with('categories', $categories)->with('categories_select', $categories_select);
 	}

@@ -2,6 +2,20 @@
 
 class CategoryController extends \BaseController {
 
+  protected $category;
+  protected $note;
+  
+  /**
+  * Inject the models.
+  * * @param Note $note  
+  * @param Category $category
+  */
+  public function __construct(Note $note, Category $category)
+  {
+    $this->note = $note;
+    $this->category = $category;
+  }
+
   /**
 	 * Display a listing of the resource.
 	 *
@@ -9,14 +23,19 @@ class CategoryController extends \BaseController {
 	 */
 	public function index()
 	{
-    $categories = DB::table('categories')       
-                  ->leftJoin('notes', 'categories.id', '=', 'notes.category')
-                  ->select(DB::raw('categories.id, name, count(notes.id) as notes'))
-                  ->orderBy('name', 'ASC')
-                  ->groupBy('categories.id')
-                  ->get();
+    $categories = $this->category->get_categories_list(20);
     
 		return View::make('categories.index')->with('categories', $categories);
+	}
+  
+  /**
+	 * Show the form for creating a new resource.
+	 *
+	 * @return Response
+	 */
+	public function create()
+	{                  
+    return View::make('categories.create');
 	}
 
 	/**
@@ -33,15 +52,25 @@ class CategoryController extends \BaseController {
     
     if ($validator->fails())
     {
-      return Response::json(array('status' => '0', 'msg' => $validator->messages()->toJson()));
+      if( Request::ajax() )
+      {
+        return Response::json(array('status' => '0', 'msg' => $validator->messages()->toJson()));
+      } 
+      return Redirect::to('categories/create')->withErrors($validator)->withInput();
 		}
     else
     {
 			$last_id = Category::create(array(
 				'name' => Input::get('name'),
 			))->id;
+      
+      if( Request::ajax() )
+      {
+        return Response::json(array('status' => '1', 'msg' => $last_id));
+      } 
 
-      return Response::json(array('status' => '1', 'msg' => $last_id));
+      Session::flash('message', 'Kategória bola vytvorená');
+			return Redirect::to('categories');
 		}
 	}
   
@@ -55,9 +84,7 @@ class CategoryController extends \BaseController {
 	{
 		$category = Category::find($id);     
 
-		$categories = Category::orderBy('name', 'ASC')->get()->lists('name', 'id');
-
-		return View::make('categories.edit')->with('category', $category)->with('categories', $categories);
+		return View::make('categories.edit')->with('category', $category);
 	}
 
 	/**
@@ -81,7 +108,7 @@ class CategoryController extends \BaseController {
     {
 			$category = Category::find($id);
 
-			$category->name		= Input::get('name');
+			$category->name	= Input::get('name');
 
 			$category->save();
 
@@ -100,9 +127,7 @@ class CategoryController extends \BaseController {
 	{
     Category::destroy($id);
     
-    DB::table('notes')
-            ->where('category', $id)
-            ->update(array('category' => 0));
+    $this->note->reset_category($id);
 
 		Session::flash('message', 'Kategória bola zmazaná');
 		return Redirect::to('categories');

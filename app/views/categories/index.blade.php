@@ -19,6 +19,8 @@
     	</div>
     @endforeach
     
+    {{ $categories->links(); }}
+    
   @else
   
     <p>Nevytvorili ste ešte žiadnu kategóriu</p>

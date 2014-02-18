@@ -58,13 +58,15 @@
 .navbar-default .dropdown-menu {
   background-color: #fff;
 }
-.navbar-default .dropdown-menu > li > a,
-.navbar-default .dropdown-menu > li > a:focus {
+
+.navbar-default .navbar-nav .open .dropdown-menu > li > a,
+.navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
   color: #555555;
 }
-.navbar-default .dropdown-menu > li > a:hover,
-.navbar-default .dropdown-menu > .active > a,
-.navbar-default .dropdown-menu > .active > a:hover {
+
+.navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+.navbar-default .navbar-nav .open .dropdown-menu > .active > a,
+.navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover {
   color: #428BCA;
   background-color: transparent;
 }

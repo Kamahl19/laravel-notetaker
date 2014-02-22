@@ -177,6 +177,10 @@
 	width: auto;
 }
 
+.dropzone {
+  margin-top: 20px;
+}
+
 /*
 * Footer
 */

@@ -1,5 +1,5 @@
 // Confirm deleting
-function delete_object(object, form) {
+function deleteObject(object, form) {
   var msg;
   
   if (object == 'note') {
@@ -25,9 +25,35 @@ function delete_object(object, form) {
       }
     }]
   });
-}
+}            
 
 $(document).ready(function() {
+
+  // DropzoneJS options
+  Dropzone.options.uploadForm = {
+    maxFilesize: 5,
+    addRemoveLinks: true,
+    dictDefaultMessage: 'Sem presunte súbory, ktoré chcete pridať',
+    dictCancelUpload: 'Zrušiť',
+    dictCancelUploadConfirmation: 'Naozaj chcete zrušiť nahrávanie súboru?',
+    dictRemoveFile: 'Zmazať',
+    dictFileTooBig: 'Súbor je príliš veľký. Maximálna veľkost je 5 MB',
+    removedfile: function(file) {        
+      $.ajax({
+        type: 'POST',
+        url: 'delete.php',
+        data: "id="+ add_your_filename_here,
+        dataType: 'html'
+      });
+      var _ref;
+      return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;        
+    }
+  };
+  
+  // Simulate click on .dropzone when button clicked
+  $(document).on("click", ".add-attachment", function() {         
+    $('#upload-form').click();
+  });     
 
 	// Display date and time picker
   $(function() {
@@ -42,7 +68,7 @@ $(document).ready(function() {
 			changeYear: true,
 			dateFormat: "d.m.yy"
 		});
-	});
+	});            
 
 	// Delete note      
 	$(function() {
@@ -54,17 +80,17 @@ $(document).ready(function() {
     })
     .removeAttr('href')
     .attr('style','cursor:pointer;')
-    .attr('onclick','delete_object($(this).attr("data-object"), $(this).find("form"));');
+    .attr('onclick','deleteObject($(this).attr("data-object"), $(this).find("form"));');
 	});
   
   // Create category
-  var name = '';
-  var cat_form = $('<div><input id="name" class="form-control" type="text" name="name" placeholder="Názov" autofocus></div>');
+  var catName = '';
+  var catForm = $('<div><input id="name" class="form-control" type="text" name="name" placeholder="Názov" autofocus></div>');
   
   $(document).on("click", ".create-category", function() {
     BootstrapDialog.show({
       title: 'Nová kategória',
-      message: cat_form,
+      message: catForm,
       buttons: [{
         label: 'Zrušiť',
         action: function(dialog) {
@@ -74,21 +100,21 @@ $(document).ready(function() {
         label: 'Uložiť',
         cssClass: 'btn-primary',
         action: function(dialog) {
-          name = $("#name").val();
+          catName = $("#name").val();
 
-          if (name.length != 0 && name != '') {
+          if (catName.length != 0 && catName != '') {
             $.ajax({
               type: "POST",
               url: $("input[name=route]").val(),
               data: {
-                name: name
+                name: catName
               }
             })
             .success(function(data) {
               if (data.status == 1) {
                 $('#category').append($('<option>', {
                   value: data.msg,
-                  text: name
+                  text: catName
                 }));
                 
                 $('#category').val(data.msg);
@@ -105,6 +131,6 @@ $(document).ready(function() {
         }
       }]
     });  
-  });
+  });     
   
 });

@@ -55,9 +55,19 @@
         </div>
   		</div>
       
+      <div class="form-group">
+        {{ Form::label('attachments', 'Nahrať prílohy', array('class' => 'col-sm-2 control-label')) }}
+        <div class="col-sm-4">
+          <button type="button" class="btn btn-default add-attachment"><span class="fa fa-paperclip fa-lg"></span> Upload</button>
+        </div>
+  		</div>   
+      
       {{ Form::hidden('route', URL::action('CategoryController@store')) }}
 
       {{ Form::submit('Uložiť', array('class' => 'btn btn-primary btn-sm')) }}
+    {{ Form::close() }}
+    
+    {{ Form::open(array('url' => 'notes/upload', 'files' => true, 'method' => 'post', 'class' => 'form-horizontal dropzone', 'id' => 'upload-form')) }}
     {{ Form::close() }}
 
   </div>

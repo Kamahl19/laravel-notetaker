@@ -59,6 +59,9 @@
       
       {{ Form::submit('Uložiť', array('class' => 'btn btn-primary btn-sm')) }}
     {{ Form::close() }}
+    
+    {{ Form::open(array('url' => 'notes/upload', 'files' => true, 'method' => 'post', 'class' => 'form-horizontal dropzone')) }}
+    {{ Form::close() }}
 		    
   </div>   
   

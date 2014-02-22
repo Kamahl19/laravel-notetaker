@@ -11,12 +11,14 @@
   <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
   {{ HTML::style('css/bootstrap-dialog.min.css'); }}
   {{ HTML::style('css/style.css'); }}
+  {{ HTML::style('css/dropzone.css');}}
 	
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
   <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
   {{ HTML::script('js/jquery-ui-timepicker-addon.js'); }}
   {{ HTML::script('js/bootstrap-dialog.min.js'); }}
+  {{ HTML::script('js/dropzone.min.js') }}
   {{ HTML::script('js/my_js.js'); }}
 </head>
   

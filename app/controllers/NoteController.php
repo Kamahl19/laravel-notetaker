@@ -72,7 +72,7 @@ class NoteController extends \BaseController {
     else
     {
 			$deadline_formated = date("Y-m-d H:i:s", strtotime(Input::get('deadline')));
-      $finished = ( Input::get('finished') == 'on') ? true : false;
+      $finished = ( Input::get('finished') == 'on') ? true : false;   
       
 			Note::create(array(
 				'title'			=> Input::get('title'),
@@ -86,7 +86,31 @@ class NoteController extends \BaseController {
 			Session::flash('message', 'Poznámka bola vytvorená');
 			return Redirect::to('notes');
 		}
-	}
+	}      
+  
+  /**
+	 * Upload file.
+	 *
+	 * @return Response
+	 */
+	public function upload()
+	{
+    $file = Input::file('file');
+
+    $destinationPath = 'uploads/'.str_random(8);
+    $filename = $file->getClientOriginalName();
+
+    $uploadSuccess = Input::file('file')->move($destinationPath, $filename);
+     
+    if ($uploadSuccess)
+    {
+       return Response::json('success', 200);
+    }
+    else
+    {
+       return Response::json('error', 400);
+    }
+	}     
   
 	/**
 	 * Show the form for editing the specified resource.

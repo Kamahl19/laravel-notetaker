@@ -2,6 +2,8 @@
 
 class Category extends Eloquent {
 
+  protected $table = 'categories';
+
   protected $guarded = array('id');
 
 	protected $fillable = array('name'); 
@@ -25,7 +27,9 @@ class Category extends Eloquent {
   }
   
   public function get_categories_select() {
-    return array('' => '') + Category::orderBy('name', 'ASC')->get()->lists('name', 'id');
+    return array('' => '') + Category::orderBy('name', 'ASC')
+                                      ->get()
+                                      ->lists('name', 'id');
   }
 
 }

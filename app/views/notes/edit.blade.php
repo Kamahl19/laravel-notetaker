@@ -8,7 +8,7 @@
 			<div class="alert alert-warning">{{ HTML::ul($errors->all()) }}</div>
 		@endif
 
-		{{ Form::model($note, array('route' => array('notes.update', $note->id), 'method' => 'PUT', 'class'=>'form-horizontal')) }}
+		{{ Form::model($note, array('route' => array('notes.update', $note->id), 'method' => 'PUT', 'class' => 'form-horizontal', 'id' => 'create-note')) }}
 
   		<div class="form-group">
         {{ Form::label('title', 'Názov', array('class' => 'sr-only col-sm-2')) }}
@@ -67,7 +67,7 @@
       {{ Form::submit('Uložiť', array('class' => 'btn btn-primary btn-sm')) }}
     {{ Form::close() }}
     
-    {{ Form::open(array('url' => 'files/store', 'files' => true, 'method' => 'post', 'class' => 'form-horizontal dropzone', 'id' => 'upload-form')) }}
+    {{ Form::open(array('url' => 'attachments/store', 'files' => true, 'method' => 'post', 'class' => 'form-horizontal dropzone', 'id' => 'upload-form')) }}
     {{ Form::close() }}
 
   </div>

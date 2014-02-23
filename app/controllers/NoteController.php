@@ -4,16 +4,19 @@ class NoteController extends \BaseController {
 
   protected $category;
   protected $note;
+  protected $attachment;
 
   /**
   * Inject the models.
   * @param Note $note
   * @param Category $category  
+  * @param Attachment $attachment  
   */
-  public function __construct(Note $note, Category $category)
+  public function __construct(Note $note, Category $category, Attachment $attachment)
   {
     $this->note = $note;
     $this->category = $category;
+    $this->attachment = $attachment;
   }
 
 	/**
@@ -29,10 +32,12 @@ class NoteController extends \BaseController {
                                          
 		foreach ($notes as &$note)
 		{
-			$note->deadline = date("d.m.Y H:i", strtotime($note->deadline));
+			$note->deadline = ($note->deadline) ? date("d.m.Y H:i", strtotime($note->deadline)) : '';
 		}
 
-		return View::make('notes.index')->with('notes', $notes)->with('categories', $categories);
+		return View::make('notes.index')
+                ->with('notes', $notes)
+                ->with('categories', $categories);
 	}
   
   /**
@@ -46,7 +51,9 @@ class NoteController extends \BaseController {
     
     $categories_select = $this->category->get_categories_select();
     
-    return View::make('notes.create')->with('categories', $categories)->with('categories_select', $categories_select);
+    return View::make('notes.create')
+                ->with('categories', $categories)
+                ->with('categories_select', $categories_select);
 	}
 
 	/**
@@ -59,9 +66,9 @@ class NoteController extends \BaseController {
     $rules = array(
       'title'       => 'required',
       'text'        => 'required',
-      'priority'    => 'required|integer',
+      'priority'    => 'integer',
       'category'    => 'required|integer|exists:categories,id',
-      'deadline'    => 'required|date',
+      'deadline'    => 'date',
 		);
 		$validator = Validator::make(Input::all(), $rules);
     
@@ -71,19 +78,24 @@ class NoteController extends \BaseController {
 		}
     else
     {
-			$deadline_formated = date("Y-m-d H:i:s", strtotime(Input::get('deadline')));
+			$deadline_formated = (Input::get('deadline')) ? date("Y-m-d H:i:s", strtotime(Input::get('deadline'))) : '';
       $finished = ( Input::get('finished') == 'on') ? true : false;   
       
-			Note::create(array(
+			$last_id = Note::create(array(
 				'title'			=> Input::get('title'),
 				'text' 			=> Input::get('text'),
 	      'priority'	=> Input::get('priority'),
 	      'category' 	=> Input::get('category'),
 	      'deadline' 	=> $deadline_formated,
 	      'finished' 	=> $finished,
-			));
+			))->id;
+      
+      $ids = Input::get('attachment_ids');
+      if ( isset($ids) )
+      {
+        $this->attachment->update_ids($ids, $last_id);
+      }
 
-			Session::flash('message', 'Poznámka bola vytvorená');
 			return Redirect::to('notes');
 		}
 	}      
@@ -101,8 +113,11 @@ class NoteController extends \BaseController {
     $categories = $this->category->get_categories_menu();    
     
     $categories_select = $this->category->get_categories_select();
-
-		return View::make('notes.edit')->with('note', $note)->with('categories', $categories)->with('categories_select', $categories_select);
+    
+		return View::make('notes.edit')
+                ->with('note', $note)
+                ->with('categories', $categories)
+                ->with('categories_select', $categories_select);
 	}
 
 	/**
@@ -116,9 +131,9 @@ class NoteController extends \BaseController {
 		$rules = array(
       'title'       => 'required',
       'text'        => 'required',
-      'priority'    => 'required|integer',
+      'priority'    => 'integer',
       'category'    => 'required|integer|exists:categories,id',
-      'deadline'    => 'required|date',
+      'deadline'    => 'date',
 		);
 		$validator = Validator::make(Input::all(), $rules);
 
@@ -128,7 +143,7 @@ class NoteController extends \BaseController {
 		}
     else
     {
-			$deadline_formated = date("Y-m-d H:i:s", strtotime(Input::get('deadline')));
+			$deadline_formated = (Input::get('deadline')) ? date("Y-m-d H:i:s", strtotime(Input::get('deadline'))) : '';     
       $finished = ( Input::get('finished') == 'on') ? true : false;
 
 			$note = Note::find($id);
@@ -141,8 +156,13 @@ class NoteController extends \BaseController {
 			$note->finished	= $finished;
 
 			$note->save();
+      
+      $ids = Input::get('attachment_ids');
+      if ( isset($ids) )
+      {
+        $this->attachment->update_ids($ids, $id);
+      }
 
-			Session::flash('message', 'Poznámka bola upravená');
 			return Redirect::to('notes');
 		}
 	}
@@ -157,7 +177,6 @@ class NoteController extends \BaseController {
 	{
     Note::destroy($id);
 
-		Session::flash('message', 'Poznámka bola zmazaná');
 		return Redirect::to('notes');
 	}
 

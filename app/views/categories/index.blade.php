@@ -23,7 +23,7 @@
     
   @else
   
-    <p>Nevytvorili ste ešte žiadnu kategóriu</p>
+    <p class="empty-list"><a href="{{ URL::to('categories/create') }}">Vytvorte prvú kategóriu</a></p>
     
   @endif
   

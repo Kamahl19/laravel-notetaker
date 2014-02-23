@@ -28,7 +28,7 @@ function deleteObject(object, form) {
 }            
 
 $(document).ready(function() {
-
+  
   // DropzoneJS options
   Dropzone.options.uploadForm = {
     maxFilesize: 5,
@@ -38,16 +38,50 @@ $(document).ready(function() {
     dictCancelUploadConfirmation: 'Naozaj chcete zrušiť nahrávanie súboru?',
     dictRemoveFile: 'Zmazať',
     dictFileTooBig: 'Súbor je príliš veľký. Maximálna veľkost je 5 MB',
-    removedfile: function(file) { 
-      alert(file);
-      /*       
+    // Show existing attachments
+    init: function() {
+      var thisDropzone = this;
+      var current_url = window.location.pathname.split('/');  
+      var note_id = current_url[current_url.length-2];
+      
+      current_url.pop(); current_url.pop(); current_url.pop();            
+      var root_url = current_url.join('/');
+      
+      // if we are editing note
+      if ( !isNaN(note_id) ) {
+        var getUrl = $("input[name=route]").val() + '/attachments/' + note_id;
+          
+        $.get(getUrl, function(data) {
+          $.each(data, function(key, value) {        
+            var attachment = { name: value.filename, size: value.filesize, serverId: value.id };
+            thisDropzone.options.addedfile.call(thisDropzone, attachment);
+            
+            // if image, display thumbnail
+            var ext = value.filename.split('.').pop();
+            
+            if (ext == 'jpg' || ext == 'jpeg' || ext == 'png' || ext == 'gif') {
+              thisDropzone.options.thumbnail.call(thisDropzone, attachment, root_url + "/uploads/"+value.folder+"/"+value.filename);
+            }
+          });   
+        });     
+      }
+    },
+    // append hidden input so we can update note_id in attachments table when we insert new note
+    success: function(file, response){
+      file.serverId = response.id;
+      $('#create-note').append('<input type="hidden" name="attachment_ids[]" value="'+response.id+'" />');
+    },
+    // delete file and DB entry
+    removedfile: function(file) {   
       $.ajax({
-        type: 'POST',
-        url: $("input[name=route]").val() + '/uploads/',
-        data: "id="+ add_your_filename_here,
-        dataType: 'html'
+        type: "DELETE",
+        url: $("input[name=route]").val() + '/attachments/' + file.serverId
+      })
+      .success(function(data) {
+        $("#create-note input[value=" + file.serverId + "]").remove();
+      })
+      .error(function(response) {
       });
-      */
       var _ref;
       return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;        
     }

@@ -7,7 +7,7 @@ class CategoryController extends \BaseController {
   
   /**
   * Inject the models.
-  * * @param Note $note  
+  * @param Note $note  
   * @param Category $category
   */
   public function __construct(Note $note, Category $category)
@@ -25,7 +25,8 @@ class CategoryController extends \BaseController {
 	{
     $categories = $this->category->get_categories_list(20);
     
-		return View::make('categories.index')->with('categories', $categories);
+		return View::make('categories.index')
+                ->with('categories', $categories);
 	}
   
   /**
@@ -69,7 +70,6 @@ class CategoryController extends \BaseController {
         return Response::json(array('status' => '1', 'msg' => $last_id));
       } 
 
-      Session::flash('message', 'Kategória bola vytvorená');
 			return Redirect::to('categories');
 		}
 	}
@@ -84,7 +84,8 @@ class CategoryController extends \BaseController {
 	{
 		$category = Category::find($id);     
 
-		return View::make('categories.edit')->with('category', $category);
+		return View::make('categories.edit')
+                ->with('category', $category);
 	}
 
 	/**
@@ -112,7 +113,6 @@ class CategoryController extends \BaseController {
 
 			$category->save();
 
-			Session::flash('message', 'Kategória bola upravená');
 			return Redirect::to('categories');
 		}
 	}
@@ -129,7 +129,6 @@ class CategoryController extends \BaseController {
     
     $this->note->reset_category($id);
 
-		Session::flash('message', 'Kategória bola zmazaná');
 		return Redirect::to('categories');
 	}
 

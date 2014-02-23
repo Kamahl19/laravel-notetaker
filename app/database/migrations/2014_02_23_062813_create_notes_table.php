@@ -14,13 +14,13 @@ class CreateNotesTable extends Migration {
 	{
 		Schema::create('notes', function(Blueprint $table)
 		{
-			$table->increments('id')->primary;
+			$table->increments('id');
       
       $table->string('title');
       $table->string('text');
 			$table->integer('priority');   
       $table->integer('category');       
-      $table->timestamp('deadline');
+      $table->string('deadline');
       $table->boolean('finished');
       
 			$table->timestamps();

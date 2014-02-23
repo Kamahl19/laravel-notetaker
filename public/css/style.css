@@ -8,6 +8,7 @@
 .navbar {
   margin-bottom: 0;
   padding: 5px 0;
+  font-size: 15px;
 }
 
 .navbar-default {
@@ -62,6 +63,7 @@
 .navbar-default .navbar-nav .open .dropdown-menu > li > a,
 .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
   color: #555555;
+  font-size: 15px;
 }
 
 .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
@@ -69,6 +71,14 @@
 .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover {
   color: #428BCA;
   background-color: transparent;
+}
+
+.browsehappy {
+  margin: 0;
+  background: #ccc;
+  color: #000;
+  padding: 10px;
+  text-align: center;
 }
 
 /*
@@ -104,7 +114,7 @@
 }
 
 .list .label {
-  padding: 0.1em 0.5em;
+  padding: 0.2em 0.5em;
   font-weight: 400;   
   vertical-align: bottom;
 }
@@ -150,6 +160,10 @@
   float: right;
 }
 
+.empty-list {
+  margin: 15px 0;
+}
+
 /*
 * Note form
 */
@@ -157,8 +171,16 @@
   padding: 10px 0;
 }
 
+.control-label {
+  font-size: 14px;
+}
+
 .form-horizontal .control-label:first-child {
   text-align: left;
+}
+
+.btn-sm {
+  font-size: 15px;  
 }
 
 .ui-timepicker-div .ui-widget-header { margin-bottom: 8px; }

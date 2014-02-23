@@ -7,22 +7,31 @@
 	<title>Plánovač</title>
 
   {{ HTML::style('css/bootstrap-yeti.min.css'); }}
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-  <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
+  {{ HTML::style('css/font-awesome.min.css'); }}  
+  {{ HTML::style('css/jquery-ui.css'); }}  
   {{ HTML::style('css/bootstrap-dialog.min.css'); }}
   {{ HTML::style('css/dropzone.css');}}
   {{ HTML::style('css/style.css'); }}
 	
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
-  <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+  {{ HTML::script('js/jquery.min.js'); }}
+  {{ HTML::script('js/jquery-ui.min.js'); }}
+  {{ HTML::script('js/bootstrap.min.js'); }}
   {{ HTML::script('js/jquery-ui-timepicker-addon.js'); }}
   {{ HTML::script('js/bootstrap-dialog.min.js'); }}
   {{ HTML::script('js/dropzone.min.js') }}
   {{ HTML::script('js/my_js.js'); }}
+  
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
 </head>
   
 <body>
+  <!--[if lt IE 8]>
+    <p class="browsehappy"><span class="fa fa-exclamation-circle fa-lg"></span> Používate zastaralý internetový prehliadač. <a href="http://browsehappy.com/"><strong>Odporúčame vám ho <strong>updatovať</strong></a> <span class="fa fa-exclamation-circle fa-lg"></span></p>
+  <![endif]-->
+
   <div class="container-fluid">
   
     <div class="header">

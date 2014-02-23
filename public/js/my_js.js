@@ -38,13 +38,16 @@ $(document).ready(function() {
     dictCancelUploadConfirmation: 'Naozaj chcete zrušiť nahrávanie súboru?',
     dictRemoveFile: 'Zmazať',
     dictFileTooBig: 'Súbor je príliš veľký. Maximálna veľkost je 5 MB',
-    removedfile: function(file) {        
+    removedfile: function(file) { 
+      alert(file);
+      /*       
       $.ajax({
         type: 'POST',
-        url: 'delete.php',
+        url: $("input[name=route]").val() + '/uploads/',
         data: "id="+ add_your_filename_here,
         dataType: 'html'
       });
+      */
       var _ref;
       return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;        
     }
@@ -105,7 +108,7 @@ $(document).ready(function() {
           if (catName.length != 0 && catName != '') {
             $.ajax({
               type: "POST",
-              url: $("input[name=route]").val(),
+              url: $("input[name=route]").val() + '/categories',
               data: {
                 name: catName
               }

@@ -88,30 +88,6 @@ class NoteController extends \BaseController {
 		}
 	}      
   
-  /**
-	 * Upload file.
-	 *
-	 * @return Response
-	 */
-	public function upload()
-	{
-    $file = Input::file('file');
-
-    $destinationPath = 'uploads/'.str_random(8);
-    $filename = $file->getClientOriginalName();
-
-    $uploadSuccess = Input::file('file')->move($destinationPath, $filename);
-     
-    if ($uploadSuccess)
-    {
-       return Response::json('success', 200);
-    }
-    else
-    {
-       return Response::json('error', 400);
-    }
-	}     
-  
 	/**
 	 * Show the form for editing the specified resource.
 	 *

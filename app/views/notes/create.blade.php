@@ -62,12 +62,12 @@
         </div>
   		</div>           
       
-      {{ Form::hidden('route', URL::action('CategoryController@store')) }}
+      {{ Form::hidden('route', URL::to('/')) }}
       
       {{ Form::submit('Uložiť', array('class' => 'btn btn-primary btn-sm')) }}
     {{ Form::close() }}
     
-    {{ Form::open(array('url' => 'notes/upload', 'files' => true, 'method' => 'post', 'class' => 'form-horizontal dropzone', 'id' => 'upload-form')) }}
+    {{ Form::open(array('url' => 'files/store', 'files' => true, 'method' => 'post', 'class' => 'form-horizontal dropzone', 'id' => 'upload-form')) }}
     {{ Form::close() }}
 		    
   </div>   

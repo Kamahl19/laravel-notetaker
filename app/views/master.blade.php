@@ -10,8 +10,8 @@
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
   <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
   {{ HTML::style('css/bootstrap-dialog.min.css'); }}
-  {{ HTML::style('css/style.css'); }}
   {{ HTML::style('css/dropzone.css');}}
+  {{ HTML::style('css/style.css'); }}
 	
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>

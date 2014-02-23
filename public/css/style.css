@@ -181,6 +181,19 @@
   margin-top: 20px;
 }
 
+.dropzone {
+  font-size: 0.8em;
+}
+
+.dropzone .dz-remove {
+  margin-left: 3px;
+}
+
+.dropzone .dz-preview,
+.dropzone-previews .dz-preview {
+  margin: 10px;
+}
+
 /*
 * Footer
 */

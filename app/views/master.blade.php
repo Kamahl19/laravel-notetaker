@@ -18,8 +18,8 @@
   {{ HTML::script('js/bootstrap.min.js'); }}
   {{ HTML::script('js/jquery-ui-timepicker-addon.js'); }}
   {{ HTML::script('js/bootstrap-dialog.min.js'); }}
-  {{ HTML::script('js/dropzone.min.js') }}
-  {{ HTML::script('js/my_js.js'); }}
+  {{ HTML::script('js/dropzone.js') }}
+  {{ HTML::script('js/my-js.js'); }}
   
   <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>

@@ -33,57 +33,68 @@ $(document).ready(function() {
   Dropzone.options.uploadForm = {
     maxFilesize: 5,
     addRemoveLinks: true,
-    dictDefaultMessage: 'Sem presunte súbory, ktoré chcete pridať',
+    dictDefaultMessage: 'Pre pridanie novej prílohy, kliknite sem',
     dictCancelUpload: 'Zrušiť',
     dictCancelUploadConfirmation: 'Naozaj chcete zrušiť nahrávanie súboru?',
     dictRemoveFile: 'Zmazať',
     dictFileTooBig: 'Súbor je príliš veľký. Maximálna veľkost je 5 MB',
     // Show existing attachments
-    init: function() {
+    init: function() {               
+      // append hidden input so we can update note_id in attachments table when we insert new note
+      this.on("success", function(file, response) {
+        file.serverId = response.id;
+        $('#create-note').append('<input type="hidden" name="attachment_ids[]" value="'+response.id+'" />');
+      });
+      
+      // delete file and DB entry
+      this.on("removedfile", function(file) {
+        $.ajax({
+          type: "DELETE",
+          url: $("input[name=route]").val() + '/attachments/' + file.serverId
+        })
+        .success(function(data) {
+          $("#create-note input[value=" + file.serverId + "]").remove();
+        });
+      });
+      
+      // 
+      this.on("addedfile", function(file) {
+        var downloadButton = Dropzone.createElement("<a style='float: right;'>Stiahnuť</a>");
+        
+        downloadButton.addEventListener("click", function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          
+          window.open($("input[name=route]").val() + "/attachments/download/" + file.serverId, "_blank");
+        });
+        
+        file.previewElement.appendChild(downloadButton);
+      });
+      
+      // display all attachments for this note
       var thisDropzone = this;
       var current_url = window.location.pathname.split('/');  
       var note_id = current_url[current_url.length-2];
       
-      current_url.pop(); current_url.pop(); current_url.pop();            
-      var root_url = current_url.join('/');
-      
       // if we are editing note
       if ( !isNaN(note_id) ) {
+        current_url.pop(); current_url.pop(); current_url.pop();            
+        var root_url = current_url.join('/');
         var getUrl = $("input[name=route]").val() + '/attachments/' + note_id;
           
         $.get(getUrl, function(data) {
           $.each(data, function(key, value) {        
             var attachment = { name: value.filename, size: value.filesize, serverId: value.id };
-            thisDropzone.options.addedfile.call(thisDropzone, attachment);
+            thisDropzone.emit("addedfile", attachment);
             
             // if image, display thumbnail
             var ext = value.filename.split('.').pop();
-            
             if (ext == 'jpg' || ext == 'jpeg' || ext == 'png' || ext == 'gif') {
-              thisDropzone.options.thumbnail.call(thisDropzone, attachment, root_url + "/uploads/"+value.folder+"/"+value.filename);
+              thisDropzone.emit("thumbnail", attachment, root_url + "/uploads/"+value.folder+"/"+value.filename);
             }
           });   
         });     
       }
-    },
-    // append hidden input so we can update note_id in attachments table when we insert new note
-    success: function(file, response){
-      file.serverId = response.id;
-      $('#create-note').append('<input type="hidden" name="attachment_ids[]" value="'+response.id+'" />');
-    },
-    // delete file and DB entry
-    removedfile: function(file) {   
-      $.ajax({
-        type: "DELETE",
-        url: $("input[name=route]").val() + '/attachments/' + file.serverId
-      })
-      .success(function(data) {
-        $("#create-note input[value=" + file.serverId + "]").remove();
-      })
-      .error(function(response) {
-      });
-      var _ref;
-      return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;        
     }
   };
   
@@ -91,6 +102,17 @@ $(document).ready(function() {
   $(document).on("click", ".add-attachment", function() {         
     $('#upload-form').click();
   });     
+  
+  // Open note URL
+  $(document).on("click", ".open-url", function() {   
+    var url = $("input[name=url]").val();
+    
+    if (url.search(/(ftp|http|https):\/\//) == -1) {
+      url = 'http://' + url;
+    }
+        
+    window.open(url, "_blank");
+  });
 
 	// Display date and time picker
   $(function() {

@@ -2,7 +2,7 @@
 
 class AttachmentController extends \BaseController {
 
-  protected $attachment;
+  protected $attachment;   
   
   /**
   * Inject the models.
@@ -16,7 +16,7 @@ class AttachmentController extends \BaseController {
   /**
 	 * Get attachments for note.
 	 *
-	 * @param  int  $id   
+	 * @param  int  $note_id   
 	 * @return Response
 	 */
 	public function get_attachments($note_id)
@@ -62,11 +62,11 @@ class AttachmentController extends \BaseController {
         'filesize'  => $fileSize
 			))->id;
       
-      return Response::json(array('success' => 200, 'id' => $lastId));
+      return Response::json(array('success' => true, 'id' => $lastId), 200);
     }
     else
     {
-      return Response::json('error', 400);
+      return Response::json(array('success' => false), 400);
     }
 	}      
   
@@ -91,6 +91,26 @@ class AttachmentController extends \BaseController {
     Attachment::destroy($id);
     
     return Response::json(array('path' => $path . $attachment->filename));
+	}
+  
+  /**
+	 * Get file for download.
+	 *
+	 * @param  int  $id   
+	 * @return Response
+	 */
+	public function download($id)
+	{
+    $attachment = Attachment::find($id); 
+    $pathToFile = public_path() . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . $attachment->folder . DIRECTORY_SEPARATOR . $attachment->filename;
+
+    $finfo = finfo_open(FILEINFO_MIME_TYPE);
+    $headers = array(
+      'Content-Type' => finfo_file($finfo, $pathToFile)
+    );
+    finfo_close($finfo);
+
+    return Response::download($pathToFile, $attachment->filename, $headers);
 	}
   
   /**

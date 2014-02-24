@@ -19,6 +19,9 @@
         <span class="badge pull-right">{{ $note->name }}</span>
         @if ( $note->files_count )
           <span class="badge pull-right"><span class="text-muted fa fa-paperclip"></span> {{ $note->files_count }}</span>
+        @endif  
+        @if ( $note->url )
+          <span class="badge pull-right"><span class="text-muted fa fa-link"></span></span>
         @endif
         @if ( $note->finished )
           <span class="badge pull-right"><span class="text-muted fa fa-check"></span></span>

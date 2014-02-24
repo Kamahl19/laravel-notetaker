@@ -88,6 +88,7 @@ class NoteController extends \BaseController {
 	      'category' 	=> Input::get('category'),
 	      'deadline' 	=> $deadline_formated,
 	      'finished' 	=> $finished,
+        'url'       => Input::get('url'),
 			))->id;
       
       $ids = Input::get('attachment_ids');
@@ -154,6 +155,7 @@ class NoteController extends \BaseController {
 			$note->category	= Input::get('category');
 			$note->deadline	= $deadline_formated;
 			$note->finished	= $finished;
+      $note->url      = Input::get('url');
 
 			$note->save();
       

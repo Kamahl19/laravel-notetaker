@@ -11,8 +11,8 @@
         </h5>
         
         <div class="list-actions pull-right">   
-          <a href="{{ URL::to('categories/' . $category->id . '/edit') }}" class="text-muted" title="Upraviť"><span class="fa fa-pencil"></span></a>
-				  <a href="{{ URL::to('categories/' . $category->id) }}" data-method="delete" data-object="category" class="text-muted" title="Zmazať"><span class="fa fa-trash-o"></span></a>
+          <a href="{{ URL::to('categories/' . $category->id . '/edit') }}" class="text-muted" title="{{ trans('common.edit') }}"><span class="fa fa-pencil"></span></a>
+				  <a href="{{ URL::to('categories/' . $category->id) }}" data-method="delete" data-object="category" class="text-muted" title="{{ trans('common.delete') }}"><span class="fa fa-trash-o"></span></a>
           <span class="badge pull-right">{{ $category->notes }}</span>
         </div>
         <div class="clearfix"></div>
@@ -23,7 +23,7 @@
     
   @else
   
-    <p class="empty-list"><a href="{{ URL::to('categories/create') }}">Vytvorte prvú kategóriu</a></p>
+    <p class="empty-list"><a href="{{ URL::to('categories/create') }}">{{ trans('common.create_first_category') }}</a></p>
     
   @endif
   

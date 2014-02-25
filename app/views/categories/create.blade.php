@@ -11,13 +11,13 @@
     {{ Form::open(array('url' => 'categories', 'class'=>'form-horizontal' )) }}
     
   		<div class="form-group">
-        {{ Form::label('name', 'Názov', array('class' => 'sr-only col-sm-2')) }}
+        {{ Form::label('name', trans('common.title'), array('class' => 'sr-only col-sm-2')) }}
         <div class="col-sm-12">
-          {{ Form::text('name', Input::old('name'), array('class' => 'form-control', 'placeholder'=>'Názov')) }}
+          {{ Form::text('name', Input::old('name'), array('class' => 'form-control', 'placeholder' => trans('common.title'))) }}
         </div>
   		</div>
   
-      {{ Form::submit('Uložiť', array('class' => 'btn btn-primary btn-sm')) }}
+      {{ Form::submit(trans('common.save'), array('class' => 'btn btn-primary btn-sm')) }}
     {{ Form::close() }}
 		    
   </div>   

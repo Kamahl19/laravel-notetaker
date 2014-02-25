@@ -32,7 +32,7 @@ class NoteController extends \BaseController {
                                          
 		foreach ($notes as &$note)
 		{
-			$note->deadline = ($note->deadline) ? date("d.m.Y H:i", strtotime($note->deadline)) : '';
+			$note->deadline = ($note->deadline) ? date(trans('common.date_time_format'), strtotime($note->deadline)) : '';
 		}
 
 		return View::make('notes.index')

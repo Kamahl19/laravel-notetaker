@@ -11,21 +11,21 @@
 		{{ Form::model($note, array('route' => array('notes.update', $note->id), 'method' => 'PUT', 'class' => 'form-horizontal', 'id' => 'create-note')) }}
 
   		<div class="form-group">
-        {{ Form::label('title', 'Názov', array('class' => 'sr-only col-sm-2')) }}
+        {{ Form::label('title', trans('common.title'), array('class' => 'sr-only col-sm-2')) }}
         <div class="col-sm-12">
-          {{ Form::text('title', null, array('class' => 'form-control', 'placeholder'=>'Názov')) }}
+          {{ Form::text('title', null, array('class' => 'form-control', 'placeholder' => trans('common.title'))) }}
         </div>
   		</div>
 
   		<div class="form-group">
-        {{ Form::label('text', 'Poznámka', array('class' => 'sr-only col-sm-2')) }}
+        {{ Form::label('text', trans('common.text'), array('class' => 'sr-only col-sm-2')) }}
         <div class="col-sm-12">
-          {{ Form::textarea('text', null, array('class' => 'form-control', 'placeholder' => 'Text', 'rows' => '3')) }}
+          {{ Form::textarea('text', null, array('class' => 'form-control', 'placeholder' => trans('common.text'), 'rows' => '3')) }}
         </div>
   		</div>
 
 			<div class="form-group">
-        {{ Form::label('category', 'Kategória', array('class' => 'col-sm-2 control-label')) }}
+        {{ Form::label('category', trans('common.category'), array('class' => 'col-sm-2 control-label')) }}
         <div class="col-sm-4">
           <div class="input-group">
             {{ Form::select('category', $categories_select, $note->category, array('class' => 'form-control')) }}
@@ -35,19 +35,19 @@
           </div>
         </div>                          
 
-				{{ Form::label('priority', 'Priorita', array('class' => 'col-sm-2 control-label')) }}
+				{{ Form::label('priority', trans('common.priority'), array('class' => 'col-sm-2 control-label')) }}
         <div class="col-sm-4">
           {{ Form::selectRange('priority', 0, 10, $note->priority, array('class' => 'form-control')) }}
         </div>
   		</div>
 
       <div class="form-group">
-        {{ Form::label('deadline', 'Termín', array('class' => 'col-sm-2 control-label')) }}
+        {{ Form::label('deadline', trans('common.deadline'), array('class' => 'col-sm-2 control-label')) }}
         <div class="col-sm-4">
           {{ Form::text('deadline', null, array('class' => 'form-control', 'id' => 'date-picker')) }}
         </div>
 
-        {{ Form::label('url', 'URL', array('class' => 'col-sm-2 control-label')) }}
+        {{ Form::label('url', trans('common.url'), array('class' => 'col-sm-2 control-label')) }}
         <div class="col-sm-4">
           <div class="input-group">
             {{ Form::text('url', null, array('class' => 'form-control')) }}   
@@ -59,12 +59,12 @@
   		</div>
       
       <div class="form-group">
-        {{ Form::label('attachments', 'Nahrať prílohy', array('class' => 'col-sm-2 control-label')) }}
+        {{ Form::label('attachments', trans('common.upload_attachment'), array('class' => 'col-sm-2 control-label')) }}
         <div class="col-sm-4">
-          <button type="button" class="btn btn-default add-attachment"><span class="fa fa-paperclip fa-lg"></span> Upload</button>
+          <button type="button" class="btn btn-default add-attachment"><span class="fa fa-paperclip fa-lg"></span> {{ trans('common.upload') }}</button>
         </div>
         
-				{{ Form::label('finished', 'Hotovo', array('class' => 'col-sm-2 control-label')) }}
+				{{ Form::label('finished', trans('common.finished'), array('class' => 'col-sm-2 control-label')) }}
         <div class="col-sm-4">
           <div class="checkbox">
             {{ Form::checkbox('finished', null, $note->finished) }}
@@ -74,7 +74,7 @@
       
       {{ Form::hidden('route', URL::to('/')) }}
 
-      {{ Form::submit('Uložiť', array('class' => 'btn btn-primary btn-sm')) }}
+      {{ Form::submit(trans('common.save'), array('class' => 'btn btn-primary btn-sm')) }}
     {{ Form::close() }}
     
     {{ Form::open(array('url' => 'attachments/store', 'files' => true, 'method' => 'post', 'class' => 'form-horizontal dropzone', 'id' => 'upload-form')) }}

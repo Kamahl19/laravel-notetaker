@@ -3,21 +3,21 @@ function deleteObject(object, form) {
   var msg;
   
   if (object == 'note') {
-    msg = 'Naozaj chcete zmazať túto poznámku?';
+    msg = trans.confirm_delete_note;
   } else {
-    msg = 'Naozaj chcete zmazať túto kategóriu?';
+    msg = trans.confirm_delete_category;
   }
   
   BootstrapDialog.show({
-    title: 'Zmazať',
+    title: trans.del,
     message: msg,
     buttons: [{
-      label: 'Zrušiť',
+      label: trans.cancel,
       action: function(dialog) {
         dialog.close();  
       }
     }, {
-      label: 'Zmazať',
+      label: trans.del,
       cssClass: 'btn-primary',
       action: function(dialog) {
         dialog.close();
@@ -31,13 +31,13 @@ $(document).ready(function() {
   
   // DropzoneJS options
   Dropzone.options.uploadForm = {
-    maxFilesize: 5,
+    maxFilesize: 10,
     addRemoveLinks: true,
-    dictDefaultMessage: 'Pre pridanie novej prílohy, kliknite sem',
-    dictCancelUpload: 'Zrušiť',
-    dictCancelUploadConfirmation: 'Naozaj chcete zrušiť nahrávanie súboru?',
-    dictRemoveFile: 'Zmazať',
-    dictFileTooBig: 'Súbor je príliš veľký. Maximálna veľkost je 5 MB',
+    dictDefaultMessage: trans.upload_default_message,
+    dictCancelUpload: trans.cancel,
+    dictCancelUploadConfirmation: trans.confirm_cancel_upload,
+    dictRemoveFile: trans.del,
+    dictFileTooBig: trans.upload_file_too_big,
     // Show existing attachments
     init: function() {               
       // append hidden input so we can update note_id in attachments table when we insert new note
@@ -59,7 +59,7 @@ $(document).ready(function() {
       
       // 
       this.on("addedfile", function(file) {
-        var downloadButton = Dropzone.createElement("<a style='float: right;'>Stiahnuť</a>");
+        var downloadButton = Dropzone.createElement("<a style='float: right;'>" + trans.download + "</a>");
         
         downloadButton.addEventListener("click", function(e) {
           e.preventDefault();
@@ -117,15 +117,15 @@ $(document).ready(function() {
 	// Display date and time picker
   $(function() {
 	  $("#date-picker").datetimepicker({
-      timeOnlyTitle: 'Termín',
-      timeText: 'Čas',
-      hourText: 'Hodina',
-      minuteText: 'Minuta',
-      currentText: 'Teraz',
-      closeText: 'OK',
+      timeOnlyTitle: trans.deadline,
+      timeText: trans.time,
+      hourText: trans.hour,
+      minuteText: trans.minute,
+      currentText: trans.now,
+      closeText: trans.ok,
       changeMonth: true,
 			changeYear: true,
-			dateFormat: "d.m.yy"
+			dateFormat: trans.date_format
 		});
 	});            
 
@@ -133,30 +133,30 @@ $(document).ready(function() {
 	$(function() {
     $('[data-method]').append(function() {
         return "\n"+
-        "<form action='"+$(this).attr('href')+"' method='POST' style='display:none'>\n"+
+        "<form action='"+$(this).attr('href')+"' method='POST' style='display: none;'>\n"+
         "	<input type='hidden' name='_method' value='"+$(this).attr('data-method')+"'>\n"+
         "</form>\n"
     })
     .removeAttr('href')
-    .attr('style','cursor:pointer;')
+    .attr('style','cursor: pointer;')
     .attr('onclick','deleteObject($(this).attr("data-object"), $(this).find("form"));');
 	});
   
   // Create category
   var catName = '';
-  var catForm = $('<div><input id="name" class="form-control" type="text" name="name" placeholder="Názov" autofocus></div>');
+  var catForm = $('<div><input id="name" class="form-control" type="text" name="name" placeholder="' + trans.title + '" autofocus></div>');
   
   $(document).on("click", ".create-category", function() {
     BootstrapDialog.show({
-      title: 'Nová kategória',
+      title: trans.new_category,
       message: catForm,
       buttons: [{
-        label: 'Zrušiť',
+        label: trans.cancel,
         action: function(dialog) {
           dialog.close();  
         }
       }, {
-        label: 'Uložiť',
+        label: trans.save,
         cssClass: 'btn-primary',
         action: function(dialog) {
           catName = $("#name").val();
@@ -178,11 +178,11 @@ $(document).ready(function() {
                 
                 $('#category').val(data.msg);
               } else {
-                BootstrapDialog.alert("Kategória s týmto názvom už existuje");
+                BootstrapDialog.alert(trans.category_exists_already);
               }
             })
             .error(function(response) {
-              BootstrapDialog.alert("Kategória nebola vytvorená: " + response.responseText);
+              BootstrapDialog.alert(trans.create_category_error + ": " + response.responseText);
             });
           }
           

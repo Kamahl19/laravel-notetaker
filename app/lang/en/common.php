@@ -8,7 +8,7 @@ return array(
   'toggle_navigation'           => 'Menu',
   'cancel'                      => 'Cancel',
   'ok'                          => 'OK',
-  'date_format'                 => 'Y-m-d',
+  'date_format'                 => 'yy-m-d',
   'date_time_format'            => 'Y-m-d H:i',
     
   // Menu

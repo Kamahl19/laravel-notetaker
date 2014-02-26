@@ -26,9 +26,9 @@ class NoteController extends \BaseController {
 	 */
 	public function index()
 	{
-    $categories = $this->category->get_categories_menu();
+    $categories = $this->category->get_categories();
     
-    $notes = $this->note->get_notes_list(20);
+    $notes = $this->note->get_notes(20);
                                          
 		foreach ($notes as &$note)
 		{
@@ -47,7 +47,7 @@ class NoteController extends \BaseController {
 	 */
 	public function create()
 	{
-    $categories = $this->category->get_categories_menu();
+    $categories = $this->category->get_categories();
     
     $categories_select = $this->category->get_categories_select();
     
@@ -111,7 +111,7 @@ class NoteController extends \BaseController {
 	{
 		$note = Note::find($id); 
     
-    $categories = $this->category->get_categories_menu();    
+    $categories = $this->category->get_categories();    
     
     $categories_select = $this->category->get_categories_select();
     

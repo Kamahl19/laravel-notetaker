@@ -3,24 +3,13 @@
 class Category extends Eloquent {
 
   protected $table = 'categories';
-
   protected $guarded = array('id');
-
 	protected $fillable = array('name'); 
   
-  public function get_categories_menu() {
+  public function get_categories($pagination = 999) {
     return DB::table('categories')       
                   ->leftJoin('notes', 'categories.id', '=', 'notes.category')
-                  ->select(DB::raw('categories.id, name, count(notes.id) as notes'))
-                  ->orderBy('name', 'ASC')
-                  ->groupBy('categories.id')
-                  ->get();
-  }
-  
-  public function get_categories_list($pagination) {
-    return DB::table('categories')       
-                  ->leftJoin('notes', 'categories.id', '=', 'notes.category')
-                  ->select(DB::raw('categories.id, name, count(notes.id) as notes'))
+                  ->select(DB::raw('categories.id, categories.name, COUNT(notes.id) AS notes'))
                   ->orderBy('name', 'ASC')
                   ->groupBy('categories.id')
                   ->paginate($pagination);

@@ -3,12 +3,10 @@
 class Note extends Eloquent {
 
   protected $table = 'notes';
-
 	protected $guarded = array('id');
-
 	protected $fillable = array('title', 'text', 'priority', 'category', 'deadline', 'finished', 'url');
   
-  public function get_notes_list($pagination) {
+  public function get_notes($pagination) {
     return DB::table('notes')       
                   ->leftJoin('categories', 'notes.category', '=', 'categories.id')
                   ->leftJoin('attachments', 'notes.id', '=', 'attachments.note_id')

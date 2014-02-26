@@ -3,6 +3,7 @@
 class AttachmentController extends \BaseController {
 
   protected $attachment;   
+  protected $uploads_path;
   
   /**
   * Inject the models.
@@ -11,6 +12,7 @@ class AttachmentController extends \BaseController {
   public function __construct(Attachment $attachment)
   {
     $this->attachment = $attachment;
+    $this->uploads_path = public_path() . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR;
   }
 
   /**
@@ -79,7 +81,7 @@ class AttachmentController extends \BaseController {
 	public function destroy($id)
 	{
     $attachment = Attachment::find($id); 
-    $path = public_path() . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . $attachment->folder . DIRECTORY_SEPARATOR;
+    $path = $this->uploads_path . $attachment->folder . DIRECTORY_SEPARATOR;
     
     unlink($path . $attachment->filename);  
     
@@ -102,7 +104,7 @@ class AttachmentController extends \BaseController {
 	public function download($id)
 	{
     $attachment = Attachment::find($id); 
-    $pathToFile = public_path() . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . $attachment->folder . DIRECTORY_SEPARATOR . $attachment->filename;
+    $pathToFile = $this->uploads_path . $attachment->folder . DIRECTORY_SEPARATOR . $attachment->filename;
 
     $finfo = finfo_open(FILEINFO_MIME_TYPE);
     $headers = array(

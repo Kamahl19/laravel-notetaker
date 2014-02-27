@@ -165,24 +165,50 @@
 }
 
 /*
-* Note form
+* Forms
 */
-.add-note-form {
+.main-form {
   padding: 10px 0;
 }
 
-.control-label {
+.main-form .input-group {
+  margin-top: 25px;
+}
+
+.main-form .input-group:first-child {
+  margin-top: 0;
+}
+
+.main-form .control-label {
   font-size: 14px;
 }
 
-.form-horizontal .control-label:first-child {
+.main-form .control-label:first-child {
   text-align: left;
 }
 
-.btn-sm {
-  font-size: 15px;  
+.main-form .checkbox {
+  padding-top: 0;
+  margin: 10px 0;
+  min-height: 0;
 }
 
+.main-form .checkbox label {
+  font-size: 14px;
+}
+
+.main-form .btn-sm {
+  font-size: 15px;
+}
+
+.forgot-password {
+  padding: 9px 0 10px 0;
+  font-size: 14px;
+}
+
+/*
+* jQuery UI Timepicker plugin
+*/
 .ui-timepicker-div .ui-widget-header { margin-bottom: 8px; }
 .ui-timepicker-div dl { text-align: left; }
 .ui-timepicker-div dl dt { float: left; clear:left; padding: 0 0 0 5px; }
@@ -199,6 +225,9 @@
 	width: auto;
 }
 
+/*
+* Dropzone jQuery upload plugin
+*/
 .dropzone {
   margin-top: 20px;
 }
@@ -215,6 +244,10 @@
 .dropzone-previews .dz-preview {
   margin: 10px;
 }
+
+/*
+* Sign-in, Login
+*/
 
 /*
 * Footer

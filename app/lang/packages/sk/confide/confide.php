@@ -7,6 +7,8 @@ return array(
   'password_confirmation'     => 'Potvrdiť heslo',
   'e_mail'                    => 'Email',
   'username_e_mail'           => 'Užívateľské meno alebo Email',
+  
+  'logout'                    => 'Odhlásiť sa',
 
   'signup'  => array(
     'title'                   => 'Registrovať',
@@ -18,7 +20,7 @@ return array(
   'login'   => array(
     'title'                   => 'Prihlásiť sa',
     'desc'                    => 'Zadajte svoje prihlasovacie údaje',
-    'forgot_password'         => '(zabudol som heslo)',
+    'forgot_password'         => 'Zabudol som heslo',
     'remember'                => 'Zapamätať prihlásenie',
     'submit'                  => 'Prihlásiť',
   ),
@@ -29,33 +31,33 @@ return array(
   ),
 
   'alerts'  => array(
-    'account_created'         => 'Váš účet bol úspešne vytvorený. Na email vám boli zaslané inštrukcie na aktiváciu účtu.',
+    'account_created'         => 'Váš účet bol úspešne vytvorený. Na email vám boli zaslané inštrukcie na aktiváciu účtu.',      
     'too_many_attempts'       => 'Prekročili ste limit pokusov o registráciu. Skúste to opäť o niekoľko minút.',
     'wrong_credentials'       => 'Nesprávne užívateľské meno, email alebo heslo.',
     'not_confirmed'           => 'Váš účet nie je aktivovaný. Inštrukcie na aktiváciu vám boli zaslané na email.',
     'confirmation'            => 'Váš účet bol aktivovaný. Teraz sa môžete prihlásiť.',
     'wrong_confirmation'      => 'Nesprávny aktivačný kód.',
-    'password_forgot'         => 'Inštrukcie na resetnutie hesla boli odoslané na váš email.',
+    'password_forgot'         => 'Inštrukcie pre obnovenie hesla boli odoslané na váš email.',
     'wrong_password_forgot'   => 'Užívateľ nebol nájdený.',
     'password_reset'          => 'Vaše heslo bolo úspešne zmenené.',
     'wrong_password_reset'    => 'Nesprávne heslo.',
-    'wrong_token'             => 'The password reset token is not valid.',
-    'duplicated_credentials'  => 'The credentials provided have already been used. Try with different credentials.',
+    'wrong_token'             => 'Token potrebný pre obnovenie hesla nie je správny.',
+    'duplicated_credentials'  => 'Poskytnuté údaje sa už používajú. Skúste to opäť s inými údajmi.',
   ),
 
   'email'   => array(
     'account_confirmation'  => array(
-      'subject'               => 'Account Confirmation',
-      'greetings'             => 'Hello :name',
-      'body'                  => 'Please access the link below to confirm your account.',
-      'farewell'              => 'Regards',
+      'subject'               => 'Aktivácia účtu',
+      'greetings'             => 'Dobrý deň :name,',
+      'body'                  => 'Pre aktiváciu účtu, kliknite na nasledujúci odkaz.',
+      'farewell'              => 'Prajeme pekný deň',
     ),
 
     'password_reset'        => array(
-      'subject'               => 'Password Reset',
-      'greetings'             => 'Hello :name',
-      'body'                  => 'Access the following link to change your password',
-      'farewell'              => 'Regards',
+      'subject'               => 'Obnovenie hesla',
+      'greetings'             => 'Dobrý deň :name,',
+      'body'                  => 'Pre obnovenie hesla, kliknite na nasledujúci odkaz.',
+      'farewell'              => 'Prajeme pekný deň',
     ),
   ),
 

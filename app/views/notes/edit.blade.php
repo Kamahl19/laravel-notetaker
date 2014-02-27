@@ -2,10 +2,10 @@
 
 @section('content')
 
-  <div class="add-note-form">
+  <div class="main-form">
 
 		@if( count($errors) > 0 )
-			<div class="alert alert-warning">{{ HTML::ul($errors->all()) }}</div>
+			<div class="alert alert-danger">{{ HTML::ul($errors->all()) }}</div>
 		@endif
 
 		{{ Form::model($note, array('route' => array('notes.update', $note->id), 'method' => 'PUT', 'class' => 'form-horizontal', 'id' => 'create-note')) }}

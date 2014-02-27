@@ -2,15 +2,15 @@
 
 @section('content')
 
-  <div class="add-note-form">
+  <div class="main-form">
   
 		@if( count($errors) > 0 )
-			<div class="alert alert-warning">{{ HTML::ul($errors->all()) }}</div>
+			<div class="alert alert-danger">{{ HTML::ul($errors->all()) }}</div>
 		@endif
 
     {{ Form::open(array('url' => 'notes', 'class' => 'form-horizontal', 'id' => 'create-note' )) }}
     
-  		<div class="form-group">
+  		<div class="form-group">               
         {{ Form::label('title', trans('common.title'), array('class' => 'sr-only col-sm-2')) }}
         <div class="col-sm-12">
           {{ Form::text('title', Input::old('title'), array('class' => 'form-control', 'placeholder' => trans('common.title'))) }}

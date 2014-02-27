@@ -61,7 +61,8 @@ class AttachmentController extends \BaseController {
 				'note_id'   => 0,
         'folder'    => $folderName,
         'filename'  => $fileName,
-        'filesize'  => $fileSize
+        'filesize'  => $fileSize,
+        'user_id'   => Auth::user()->id,
 			))->id;
       
       return Response::json(array('success' => true, 'id' => $lastId), 200);
@@ -81,18 +82,26 @@ class AttachmentController extends \BaseController {
 	public function destroy($id)
 	{
     $attachment = Attachment::find($id); 
-    $path = $this->uploads_path . $attachment->folder . DIRECTORY_SEPARATOR;
     
-    unlink($path . $attachment->filename);  
-    
-    if ( $this->is_dir_empty($path) )
+    if ($attachment->user_id == Auth::user()->id)
     {
-      rmdir($path);
-    } 
-    
-    Attachment::destroy($id);
-    
-    return Response::json(array('path' => $path . $attachment->filename));
+      $path = $this->uploads_path . $attachment->folder . DIRECTORY_SEPARATOR;
+      
+      unlink($path . $attachment->filename);  
+      
+      if ( $this->is_dir_empty($path) )
+      {
+        rmdir($path);
+      } 
+      
+      Attachment::destroy($id);
+      
+      return Response::json(array('status' => '1'), 200);
+    }
+    else
+    {
+      return Response::json(array('status' => '0'), 400);
+    }
 	}
   
   /**
@@ -103,16 +112,20 @@ class AttachmentController extends \BaseController {
 	 */
 	public function download($id)
 	{
-    $attachment = Attachment::find($id); 
-    $pathToFile = $this->uploads_path . $attachment->folder . DIRECTORY_SEPARATOR . $attachment->filename;
-
-    $finfo = finfo_open(FILEINFO_MIME_TYPE);
-    $headers = array(
-      'Content-Type' => finfo_file($finfo, $pathToFile)
-    );
-    finfo_close($finfo);
-
-    return Response::download($pathToFile, $attachment->filename, $headers);
+    $attachment = Attachment::find($id);   
+        
+    if ($attachment->user_id == Auth::user()->id)
+    {
+      $pathToFile = $this->uploads_path . $attachment->folder . DIRECTORY_SEPARATOR . $attachment->filename;
+  
+      $finfo = finfo_open(FILEINFO_MIME_TYPE);
+      $headers = array(
+        'Content-Type' => finfo_file($finfo, $pathToFile)
+      );
+      finfo_close($finfo);
+  
+      return Response::download($pathToFile, $attachment->filename, $headers);
+    }
 	}
   
   /**

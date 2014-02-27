@@ -89,6 +89,7 @@ class NoteController extends \BaseController {
 	      'deadline' 	=> $deadline_formated,
 	      'finished' 	=> $finished,
         'url'       => Input::get('url'),
+        'user_id'   => Auth::user()->id,
 			))->id;
       
       $ids = Input::get('attachment_ids');

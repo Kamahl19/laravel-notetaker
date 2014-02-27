@@ -53,7 +53,9 @@ $(document).ready(function() {
           url: $("input[name=route]").val() + '/attachments/' + file.serverId
         })
         .success(function(data) {
-          $("#create-note input[value=" + file.serverId + "]").remove();
+          if (data.status == 1) {
+            $("#create-note input[value=" + file.serverId + "]").remove();
+          }
         });
       });
       

@@ -62,7 +62,8 @@ class CategoryController extends \BaseController {
     else
     {
 			$last_id = Category::create(array(
-				'name' => Input::get('name'),
+				'name'    => Input::get('name'),
+        'user_id' => Auth::user()->id,
 			))->id;
       
       if( Request::ajax() )

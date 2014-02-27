@@ -1,23 +1,22 @@
 <?php
-
-// Notes routes
-Route::get('/', function()
+        
+Route::group(array('before' => 'auth'), function()
 {
+  Route::get('/', function()
+  {
     return Redirect::to('notes');
-});
-
-Route::resource('notes', 'NoteController');
-
-// Categories routes
-Route::resource('categories', 'CategoryController');    
-
-// Attachments routes
-Route::get('attachments/{attachments}', 'AttachmentController@get_attachments');
-Route::get('attachments/download/{attachments}', 'AttachmentController@download');
-Route::post('attachments/store', 'AttachmentController@store');  
-Route::delete('attachments/{attachments}', 'AttachmentController@destroy');
-
-// Confide routes
+  });
+  
+  Route::resource('notes',                          'NoteController');
+  
+  Route::resource('categories',                     'CategoryController');    
+  
+  Route::get('attachments/{attachments}',           'AttachmentController@get_attachments');
+  Route::get('attachments/download/{attachments}',  'AttachmentController@download');
+  Route::post('attachments/store',                  'AttachmentController@store');  
+  Route::delete('attachments/{attachments}',        'AttachmentController@destroy');
+});                
+  
 Route::get( 'user/create',                 'UserController@create');
 Route::post('user',                        'UserController@store');
 Route::get( 'user/login',                  'UserController@login');

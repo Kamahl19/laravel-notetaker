@@ -4,16 +4,14 @@ class UserController extends BaseController {
 
   /**
    * Displays the form for account creation
-   *
    */
   public function create()
   {
-    return View::make(Config::get('confide::signup_form'));
+    return View::make('user.signup');
   }
 
   /**
    * Stores new account
-   *
    */
   public function store()
   {
@@ -50,7 +48,6 @@ class UserController extends BaseController {
 
   /**
    * Displays the login form
-   *
    */
   public function login()
   {
@@ -62,13 +59,12 @@ class UserController extends BaseController {
     }
     else
     {
-      return View::make(Config::get('confide::login_form'));
+      return View::make('user.login');
     }
   }
 
   /**
    * Attempt to do login
-   *
    */
   public function do_login()
   {
@@ -138,16 +134,14 @@ class UserController extends BaseController {
 
   /**
    * Displays the forgot password form
-   *
    */
   public function forgot_password()
   {
-    return View::make(Config::get('confide::forgot_password_form'));
+    return View::make('user.forgot_password');
   }
 
   /**
    * Attempt to send change password link to the given email
-   *
    */
   public function do_forgot_password()
   {
@@ -168,17 +162,15 @@ class UserController extends BaseController {
 
   /**
    * Shows the change password form with the given token
-   *
    */
   public function reset_password( $token )
   {
-    return View::make(Config::get('confide::reset_password_form'))
+    return View::make('user.reset_password')
                 ->with('token', $token);
   }
 
   /**
    * Attempt change password of the user
-   *
    */
   public function do_reset_password()
   {
@@ -206,7 +198,6 @@ class UserController extends BaseController {
 
   /**
    * Log the user out of the application.
-   *
    */
   public function logout()
   {

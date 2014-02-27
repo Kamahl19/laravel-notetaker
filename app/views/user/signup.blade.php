@@ -5,7 +5,7 @@
   <div class="main-form">
   
     @if ( Session::get('error') )
-      <div class="alert alert-error alert-danger">
+      <div class="alert alert-danger">
         @if ( is_array(Session::get('error')) )
           {{ head(Session::get('error')) }}
         @endif

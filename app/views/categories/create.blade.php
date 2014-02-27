@@ -18,6 +18,7 @@
   		</div>
   
       {{ Form::submit(trans('common.save'), array('class' => 'btn btn-primary btn-sm')) }}
+      
     {{ Form::close() }}
 		    
   </div>   

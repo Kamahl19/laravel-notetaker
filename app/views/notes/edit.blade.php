@@ -75,6 +75,7 @@
       {{ Form::hidden('route', URL::to('/')) }}
 
       {{ Form::submit(trans('common.save'), array('class' => 'btn btn-primary btn-sm')) }}
+      
     {{ Form::close() }}
     
     {{ Form::open(array('url' => 'attachments/store', 'files' => true, 'method' => 'post', 'class' => 'form-horizontal dropzone', 'id' => 'upload-form')) }}

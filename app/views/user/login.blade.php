@@ -2,7 +2,7 @@
 
 @section('content')
         
-  <div class="main-form col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2">
+  <div class="login-form col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2">
   
     @if ( Session::get('error') )
       <div class="alert alert-danger">{{{ Session::get('error') }}}</div>

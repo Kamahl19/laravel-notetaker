@@ -68,11 +68,9 @@
         <div class="col-sm-4">
           <div class="checkbox">
             {{ Form::checkbox('finished', Input::old('finished'), 0) }}
-          </div>
+          </div>                  
         </div>
   		</div>
-      
-      {{ Input::old('file') }}           
       
       {{ Form::hidden('route', URL::to('/')) }}
       

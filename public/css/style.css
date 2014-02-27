@@ -163,18 +163,6 @@
 /*
 * Forms
 */
-.main-form {
-  padding: 10px 0;
-}
-
-.main-form .input-group {
-  margin-top: 25px;
-}
-
-.main-form .input-group:first-child {
-  margin-top: 0;
-}
-
 .main-form .control-label {
   font-size: 14px;
 }
@@ -183,22 +171,26 @@
   text-align: left;
 }
 
-.main-form .checkbox {
+.login-form .input-group {
+  margin-top: 25px;
+}
+
+.login-form .input-group:first-child {
+  margin-top: 0;
+}        
+
+.login-form .checkbox {
   padding-top: 0;
   margin: 10px 0;
   min-height: 0;
 }
 
-.main-form .checkbox label {
+.login-form .forgot-password {
+  padding: 9px 0 10px 0;
   font-size: 14px;
 }
 
-.main-form .btn-sm {
-  font-size: 15px;
-}
-
-.forgot-password {
-  padding: 9px 0 10px 0;
+form .btn-sm {
   font-size: 14px;
 }
 
@@ -242,10 +234,6 @@
 }
 
 /*
-* Sign-in, Login
-*/
-
-/*
 * Footer
 */
 .footer {
@@ -265,6 +253,6 @@
 
 @media (min-width: 992px) {
   .container-fluid {
-    max-width: 950px;
+    max-width: 970px;
   }
 }

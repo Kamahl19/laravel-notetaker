@@ -23,6 +23,10 @@
         <span class="input-group-addon"><span class="fa fa-lock fa-fw fa-lg"></span></span>
         {{ Form::password('password', array('class' => 'form-control', 'id' => 'password', 'placeholder' => trans('confide::confide.password'), 'required' => 'required')) }}
       </div>
+          
+      <div class="pull-right forgot-password">
+        <a href="{{{ (Confide::checkAction('UserController@forgot_password')) ?: 'forgot' }}}">{{{ Lang::get('confide::confide.login.forgot_password') }}}</a>
+      </div>
       
       <div class="checkbox">
         <label>
@@ -35,10 +39,6 @@
       
       {{ Form::submit(trans('confide::confide.login.submit'), array('class' => 'btn btn-primary btn-sm')) }} 
         
-      <div class="pull-right forgot-password">
-        <a href="{{{ (Confide::checkAction('UserController@forgot_password')) ?: 'forgot' }}}">{{{ Lang::get('confide::confide.login.forgot_password') }}}</a>
-      </div>
-      
     </form>  
     
   </div>

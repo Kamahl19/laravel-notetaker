@@ -85,11 +85,11 @@
 * Content
 */
 .content {
-  padding: 10px;
+  padding: 20px 15px;
 }
 
 .alert {
-	margin: 5px 0;
+	margin: 0 0 10px 0;
 }
 
 .alert ul {
@@ -99,37 +99,37 @@
 /*
 * Lists
 */
-.list {
-  padding: 17px 0 13px 0;
+.list-item {
+  padding: 15px 0;
 	border-top: 1px solid #e5e5e5;
 }
 
-.list:first-child {
-	padding-top: 10px;
-  border: 0 !important;
+.list-item:first-child {
+	padding-top: 0;
+  border: 0;
 }
 
-.list:last-child {
-  padding-bottom: 10px;
+.list-item:last-child {
+  padding-bottom: 0;
 }
 
-.list .label {
+.list-item h5 {
+  margin: 0;
+  line-height: 1;
+}
+
+.list-item h5 a {
+  text-decoration: none;
+}
+
+.list-item h5 .label {
   padding: 0.2em 0.5em;
   font-weight: 400;   
   vertical-align: bottom;
 }
 
-.list h5 {
-  margin: 0;
-  line-height: 1;
-}
-
-.list h5 a {
-  text-decoration: none;
-}
-
-.list p {
-  margin: 7px 0 0 0;
+.list-item p {
+  margin: 15px 0 0 0;
 }
 
 .list-actions {
@@ -141,12 +141,8 @@
   display: none;
 }
 
-.list:hover .list-actions a {
+.list-item:hover .list-actions a {
   display: inline-block;
-}
-
-.list-actions .badge {
-  margin-left: 10px;
 }
 
 .bootstrap-dialog .modal-header {
@@ -156,7 +152,7 @@
 }
 
 .pagination {
-  margin: 0 0 20px 0;
+  margin: 0;
   float: right;
 }
 

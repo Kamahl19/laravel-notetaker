@@ -6,19 +6,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<title>{{ trans('common.site_title') }}</title>           
 
-  {{ HTML::style('css/bootstrap-yeti.min.css'); }}
-  {{ HTML::style('css/font-awesome.min.css'); }}  
-  {{ HTML::style('css/jquery-ui.css'); }}  
-  {{ HTML::style('css/bootstrap-dialog.min.css'); }}
-  {{ HTML::style('css/dropzone.css');}}
+  {{ HTML::style('vendor/css/bootstrap-yeti.min.css'); }}
+  {{ HTML::style('vendor/css/font-awesome.min.css'); }}  
+  {{ HTML::style('vendor/css/jquery-ui.css'); }}  
+  {{ HTML::style('vendor/css/bootstrap-dialog.min.css'); }}
+  {{ HTML::style('vendor/css/dropzone.css');}}
   {{ HTML::style('css/style.css'); }}
 	
-  {{ HTML::script('js/jquery.min.js'); }}
-  {{ HTML::script('js/jquery-ui.min.js'); }}
-  {{ HTML::script('js/bootstrap.min.js'); }}
-  {{ HTML::script('js/jquery-ui-timepicker-addon.js'); }}
-  {{ HTML::script('js/bootstrap-dialog.min.js'); }}
-  {{ HTML::script('js/dropzone.js') }}
+  {{ HTML::script('vendor/js/jquery.min.js'); }}
+  {{ HTML::script('vendor/js/jquery-ui.min.js'); }}
+  {{ HTML::script('vendor/js/bootstrap.min.js'); }}
+  {{ HTML::script('vendor/js/jquery-ui-timepicker-addon.js'); }}
+  {{ HTML::script('vendor/js/bootstrap-dialog.min.js'); }}
+  {{ HTML::script('vendor/js/dropzone.js') }}
   {{ HTML::script('js/my-js.js'); }}
   
   <!--[if lt IE 9]>

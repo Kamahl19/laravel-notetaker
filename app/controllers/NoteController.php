@@ -112,14 +112,21 @@ class NoteController extends \BaseController {
 	{
 		$note = Note::find($id); 
     
-    $categories = $this->category->get_categories();    
-    
-    $categories_select = $this->category->get_categories_select();
-    
-		return View::make('notes.edit')
-                ->with('note', $note)
-                ->with('categories', $categories)
-                ->with('categories_select', $categories_select);
+    if ($note->user_id == Auth::user()->id)
+    {
+      $categories = $this->category->get_categories();    
+      
+      $categories_select = $this->category->get_categories_select();
+      
+  		return View::make('notes.edit')
+                  ->with('note', $note)
+                  ->with('categories', $categories)
+                  ->with('categories_select', $categories_select);    
+    }
+    else
+    {
+      return Redirect::to('notes');
+    }
 	}
 
 	/**
@@ -130,44 +137,47 @@ class NoteController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		$rules = array(
-      'title'       => 'required',
-      'text'        => 'required',
-      'priority'    => 'integer',
-      'category'    => 'required|integer|exists:categories,id',
-      'deadline'    => 'date',
-		);
-		$validator = Validator::make(Input::all(), $rules);
-
-    if ($validator->fails())
+    $note = Note::find($id);
+    
+    if ($note->user_id == Auth::user()->id)
     {
-			return Redirect::to('notes/' . $id . '/edit')->withErrors($validator)->withInput();
-		}
-    else
-    {
-			$deadline_formated = (Input::get('deadline')) ? date("Y-m-d H:i:s", strtotime(Input::get('deadline'))) : '';     
-      $finished = ( Input::get('finished') == 'on') ? true : false;
-
-			$note = Note::find($id);
-
-			$note->title		= Input::get('title');
-			$note->text			= Input::get('text');
-			$note->priority	= Input::get('priority');
-			$note->category	= Input::get('category');
-			$note->deadline	= $deadline_formated;
-			$note->finished	= $finished;
-      $note->url      = Input::get('url');
-
-			$note->save();
-      
-      $ids = Input::get('attachment_ids');
-      if ( isset($ids) )
+  		$rules = array(
+        'title'       => 'required',
+        'text'        => 'required',
+        'priority'    => 'integer',
+        'category'    => 'required|integer|exists:categories,id',
+        'deadline'    => 'date',
+  		);
+  		$validator = Validator::make(Input::all(), $rules);
+  
+      if ($validator->fails())
       {
-        $this->attachment->update_ids($ids, $id);
-      }
-
-			return Redirect::to('notes');
-		}
+  			return Redirect::to('notes/' . $id . '/edit')->withErrors($validator)->withInput();
+  		}
+      else
+      {
+  			$deadline_formated = (Input::get('deadline')) ? date("Y-m-d H:i:s", strtotime(Input::get('deadline'))) : '';     
+        $finished = ( Input::get('finished') == 'on') ? true : false;
+  
+  			$note->title		= Input::get('title');
+  			$note->text			= Input::get('text');
+  			$note->priority	= Input::get('priority');
+  			$note->category	= Input::get('category');
+  			$note->deadline	= $deadline_formated;
+  			$note->finished	= $finished;
+        $note->url      = Input::get('url');
+  
+  			$note->save();
+        
+        $ids = Input::get('attachment_ids');
+        if ( isset($ids) )
+        {
+          $this->attachment->update_ids($ids, $id);
+        }
+  		}
+    }
+    
+    return Redirect::to('notes');
 	}
 
 	/**
@@ -178,7 +188,12 @@ class NoteController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-    Note::destroy($id);
+    $note = Note::find($id);
+    
+    if ($note->user_id == Auth::user()->id)
+    {
+      Note::destroy($id);
+    }
 
 		return Redirect::to('notes');
 	}

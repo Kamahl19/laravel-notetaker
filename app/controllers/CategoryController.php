@@ -84,9 +84,16 @@ class CategoryController extends \BaseController {
 	public function edit($id)
 	{
 		$category = Category::find($id);     
-
-		return View::make('categories.edit')
-                ->with('category', $category);
+    
+    if ($category->user_id == Auth::user()->id)
+    {
+		  return View::make('categories.edit')
+                  ->with('category', $category);
+    }
+    else
+    {
+      return Redirect::to('categories');
+    }
 	}
 
 	/**
@@ -97,25 +104,28 @@ class CategoryController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		$rules = array(
-      'name' => 'required|unique:categories',
-		);
-		$validator = Validator::make(Input::all(), $rules);
-
-    if ($validator->fails())
+    $category = Category::find($id);
+    
+    if ($category->user_id == Auth::user()->id)
     {
-			return Redirect::to('categories/' . $id . '/edit')->withErrors($validator)->withInput();
-		}
-    else
-    {
-			$category = Category::find($id);
-
-			$category->name	= Input::get('name');
-
-			$category->save();
-
-			return Redirect::to('categories');
-		}
+  		$rules = array(
+        'name' => 'required|unique:categories',
+  		);
+  		$validator = Validator::make(Input::all(), $rules);
+  
+      if ($validator->fails())
+      {
+  			return Redirect::to('categories/' . $id . '/edit')->withErrors($validator)->withInput();
+  		}
+      else
+      {
+  			$category->name	= Input::get('name');
+  
+  			$category->save();
+  		}
+    }
+    
+    return Redirect::to('categories');
 	}
 
 	/**
@@ -126,9 +136,14 @@ class CategoryController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-    Category::destroy($id);
+    $category = Category::find($id);
     
-    $this->note->reset_category($id);
+    if ($category->user_id == Auth::user()->id)
+    {
+      Category::destroy($id);
+      
+      $this->note->reset_category($id);
+    }
 
 		return Redirect::to('categories');
 	}

@@ -108,8 +108,8 @@
 	padding-top: 0;
   border: 0;
 }
-
-.list-item:last-child {
+  
+.items .list-item:last-child {
   padding-bottom: 0;
 }
 
@@ -255,4 +255,11 @@ form .btn-sm {
   .container-fluid {
     max-width: 970px;
   }
+}
+
+/*
+* Helpers
+*/
+.no-bottom-margin {
+  margin-bottom: 0;
 }

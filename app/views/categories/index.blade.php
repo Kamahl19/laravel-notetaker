@@ -4,7 +4,8 @@
 
   @if( count($categories) > 0 )
     
-    @foreach($categories as $key => $category)
+    <div class="items">
+      @foreach($categories as $key => $category)
       <div class="list-item">
         <div class="list-actions pull-right">   
           <a href="{{ URL::to('categories/' . $category->id . '/edit') }}" class="text-muted" title="{{ trans('common.edit') }}"><span class="fa fa-pencil"></span></a>
@@ -16,7 +17,8 @@
           <a href="{{ URL::to('categories/' . $category->id . '/edit') }}"><strong>{{ $category->name }}</strong></a>
         </h5>
     	</div>
-    @endforeach
+      @endforeach
+    </div>
     
   @else
   

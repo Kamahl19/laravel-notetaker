@@ -31,7 +31,7 @@
       {{ Form::hidden('token', $token) }}
       {{ Form::hidden('_token', Session::getToken()) }}
       
-      <div class="form-group">
+      <div class="form-group no-bottom-margin">
         {{ Form::label('', '', array('class' => 'control-label col-sm-2')) }}
         <div class="col-sm-10">
           {{ Form::submit(trans('confide::confide.signup.submit'), array('class' => 'btn btn-primary btn-sm')) }} 

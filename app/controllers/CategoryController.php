@@ -23,7 +23,7 @@ class CategoryController extends \BaseController {
 	 */
 	public function index()
 	{
-    $categories = $this->category->get_categories(20);
+    $categories = $this->category->get_categories();
     
 		return View::make('categories.index')
                 ->with('categories', $categories);

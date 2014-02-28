@@ -41,7 +41,7 @@ return array(
   'priority'                    => 'Priorita',
   'deadline'                    => 'Termín',
   'url'                         => 'URL',
-  'upload_attachment'           => 'Nahrať prílohy',
+  'upload_attachment'           => 'Prílohy',
   'upload'                      => 'Upload',
   'finished'                    => 'Hotovo',
   'save'                        => 'Uložiť',

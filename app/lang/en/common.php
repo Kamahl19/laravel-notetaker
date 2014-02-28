@@ -41,7 +41,7 @@ return array(
   'priority'                    => 'Priority',
   'deadline'                    => 'Deadline',
   'url'                         => 'URL',
-  'upload_attachment'           => 'Upload attachments',
+  'upload_attachment'           => 'Attachments',
   'upload'                      => 'Upload',
   'finished'                    => 'Finished',
   'save'                        => 'Save',

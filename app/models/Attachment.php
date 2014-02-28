@@ -15,7 +15,7 @@ class Attachment extends Eloquent {
   public function get_attachments($note_id) {    
     return DB::table('attachments')        
                   ->where('note_id', '=', $note_id)
-                  ->where('user_id', Auth::user()->id)
+                  ->where('user_id', Confide::user()->id)
                   ->orderBy('created_at', 'ASC')
                   ->get();
   }

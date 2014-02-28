@@ -62,7 +62,7 @@ class AttachmentController extends \BaseController {
         'folder'    => $folderName,
         'filename'  => $fileName,
         'filesize'  => $fileSize,
-        'user_id'   => Auth::user()->id,
+        'user_id'   => Confide::user()->id,
 			))->id;
       
       return Response::json(array('success' => true, 'id' => $lastId), 200);
@@ -83,7 +83,7 @@ class AttachmentController extends \BaseController {
 	{
     $attachment = Attachment::find($id); 
     
-    if ($attachment->user_id == Auth::user()->id)
+    if ($attachment->user_id == Confide::user()->id)
     {
       $path = $this->uploads_path . $attachment->folder . DIRECTORY_SEPARATOR;
       
@@ -114,7 +114,7 @@ class AttachmentController extends \BaseController {
 	{
     $attachment = Attachment::find($id);   
         
-    if ($attachment->user_id == Auth::user()->id)
+    if ($attachment->user_id == Confide::user()->id)
     {
       $pathToFile = $this->uploads_path . $attachment->folder . DIRECTORY_SEPARATOR . $attachment->filename;
   

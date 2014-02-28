@@ -63,7 +63,7 @@ class CategoryController extends \BaseController {
     {
 			$last_id = Category::create(array(
 				'name'    => Input::get('name'),
-        'user_id' => Auth::user()->id,
+        'user_id' => Confide::user()->id,
 			))->id;
       
       if( Request::ajax() )
@@ -85,7 +85,7 @@ class CategoryController extends \BaseController {
 	{
 		$category = Category::find($id);     
     
-    if ($category->user_id == Auth::user()->id)
+    if ($category->user_id == Confide::user()->id)
     {
 		  return View::make('categories.edit')
                   ->with('category', $category);
@@ -106,7 +106,7 @@ class CategoryController extends \BaseController {
 	{
     $category = Category::find($id);
     
-    if ($category->user_id == Auth::user()->id)
+    if ($category->user_id == Confide::user()->id)
     {
   		$rules = array(
         'name' => 'required|unique:categories',
@@ -138,7 +138,7 @@ class CategoryController extends \BaseController {
 	{
     $category = Category::find($id);
     
-    if ($category->user_id == Auth::user()->id)
+    if ($category->user_id == Confide::user()->id)
     {
       Category::destroy($id);
       

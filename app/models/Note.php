@@ -11,7 +11,7 @@ class Note extends Eloquent {
                   ->leftJoin('categories', 'notes.category', '=', 'categories.id')
                   ->leftJoin('attachments', 'notes.id', '=', 'attachments.note_id')
                   ->select(DB::raw('notes.id, title, text, priority, finished, notes.created_at, deadline, name, url, COUNT(attachments.id) as files_count'))
-                  ->where('notes.user_id', Auth::user()->id)
+                  ->where('notes.user_id', Confide::user()->id)
                   ->groupBy('notes.id')
                   ->paginate($pagination);
   }

@@ -10,7 +10,7 @@ class Category extends Eloquent {
     return DB::table('categories')       
                   ->leftJoin('notes', 'categories.id', '=', 'notes.category')
                   ->select(DB::raw('categories.id, categories.name, COUNT(notes.id) AS notes'))
-                  ->where('categories.user_id', Auth::user()->id)
+                  ->where('categories.user_id', Confide::user()->id)
                   ->orderBy('name', 'ASC')
                   ->groupBy('categories.id')
                   ->paginate($pagination);
@@ -18,7 +18,7 @@ class Category extends Eloquent {
   
   public function get_categories_select() {
     return array('' => '') + Category::orderBy('name', 'ASC')
-                                      ->where('user_id', Auth::user()->id)
+                                      ->where('user_id', Confide::user()->id)
                                       ->get()
                                       ->lists('name', 'id');
   }

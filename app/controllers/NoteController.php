@@ -89,7 +89,7 @@ class NoteController extends \BaseController {
 	      'deadline' 	=> $deadline_formated,
 	      'finished' 	=> $finished,
         'url'       => Input::get('url'),
-        'user_id'   => Auth::user()->id,
+        'user_id'   => Confide::user()->id,
 			))->id;
       
       $ids = Input::get('attachment_ids');
@@ -112,7 +112,7 @@ class NoteController extends \BaseController {
 	{
 		$note = Note::find($id); 
     
-    if ($note->user_id == Auth::user()->id)
+    if ($note->user_id == Confide::user()->id)
     {
       $categories = $this->category->get_categories();    
       
@@ -139,7 +139,7 @@ class NoteController extends \BaseController {
 	{
     $note = Note::find($id);
     
-    if ($note->user_id == Auth::user()->id)
+    if ($note->user_id == Confide::user()->id)
     {
   		$rules = array(
         'title'       => 'required',
@@ -190,7 +190,7 @@ class NoteController extends \BaseController {
 	{
     $note = Note::find($id);
     
-    if ($note->user_id == Auth::user()->id)
+    if ($note->user_id == Confide::user()->id)
     {
       Note::destroy($id);
     }

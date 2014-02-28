@@ -25,7 +25,7 @@
       </div>
           
       <div class="pull-right forgot-password">
-        <a href="{{{ (Confide::checkAction('UserController@forgot_password')) ?: 'forgot' }}}">{{{ Lang::get('confide::confide.login.forgot_password') }}}</a>
+        <a href="{{{ (Confide::checkAction('UserController@forgot_password')) ?: 'forgot' }}}">{{{ trans('confide::confide.login.forgot_password') }}}</a>
       </div>
       
       <div class="checkbox">

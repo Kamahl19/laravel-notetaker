@@ -89,7 +89,7 @@ class AttachmentController extends \BaseController {
       
       unlink($path . $attachment->filename);  
       
-      if ( $this->is_dir_empty($path) )
+      if ( Functions::is_dir_empty($path) )
       {
         rmdir($path);
       } 
@@ -128,29 +128,4 @@ class AttachmentController extends \BaseController {
     }
 	}
   
-  /**
-	 * Check if folder is empty.
-	 *
-	 * @param  string  $path
-	 * @return boolean
-	 */
-  public function is_dir_empty($path)
-  {
-    if ( !is_readable($path) )
-    {
-      return false;
-    } 
-    
-    $handle = opendir($path);
-    
-    while (false !== ($entry = readdir($handle)))
-    {
-      if ($entry != "." && $entry != "..") {
-        return false;
-      }
-    }
-    
-    return true;
-  }
-
 }

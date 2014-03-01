@@ -46,6 +46,10 @@ return array(
   'finished'                    => 'Finished',
   'save'                        => 'Save',
   
+  // User
+  'timezone'                    => 'Timezone',
+  'language'                    => 'Language',
+  
   // Javascript
   'confirm_delete_note'         => 'Are you sure you want to delete this note?',
   'confirm_delete_category'     => 'Are you sure you want to delete this category?',

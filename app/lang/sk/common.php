@@ -46,6 +46,10 @@ return array(
   'finished'                    => 'Hotovo',
   'save'                        => 'Uložiť',
   
+  // User
+  'timezone'                    => 'Časové pásmo',
+  'language'                    => 'Jazyk',
+  
   // Javascript
   'confirm_delete_note'         => 'Naozaj chcete zmazať túto poznámku?',
   'confirm_delete_category'     => 'Naozaj chcete zmazať túto kategóriu?',

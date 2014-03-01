@@ -21,6 +21,8 @@ class UserController extends BaseController {
     $user->email                  = Input::get('email');
     $user->password               = Input::get('password');
     $user->password_confirmation  = Input::get('password_confirmation');
+    $user->timezone               = Input::get('timezone');
+    $user->language               = Input::get('language');
 
     $user->save();
 

@@ -189,5 +189,22 @@ class UserController extends BaseController {
     
     return Redirect::to('/');
   }
+  
+  /**
+   * Shows the settings form
+   */
+  public function settings()
+  {
+    return View::make('user.settings')
+                ->with('user', Confide::User());
+  }
+
+  /**
+   * Attempt change settings of the user
+   */
+  public function do_settings()
+  {           
+   
+  }
 
 }

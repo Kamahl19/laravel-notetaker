@@ -14,6 +14,8 @@ class NoteController extends \BaseController {
   */
   public function __construct(Note $note, Category $category, Attachment $attachment)
   {
+    parent::__construct();
+    
     $this->note = $note;
     $this->category = $category;
     $this->attachment = $attachment;

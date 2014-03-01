@@ -11,6 +11,8 @@ class AttachmentController extends \BaseController {
   */
   public function __construct(Attachment $attachment)
   {
+    parent::__construct();
+    
     $this->attachment = $attachment;
     $this->uploads_path = public_path() . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR;
   }

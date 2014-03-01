@@ -12,6 +12,8 @@ class CategoryController extends \BaseController {
   */
   public function __construct(Note $note, Category $category)
   {
+    parent::__construct();
+    
     $this->note = $note;
     $this->category = $category;
   }

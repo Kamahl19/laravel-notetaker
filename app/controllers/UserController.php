@@ -204,7 +204,29 @@ class UserController extends BaseController {
    */
   public function do_settings()
   {           
-   
+		$rules = array(
+      'email'     => 'required|email|unique:users',
+      'timezone'  => 'required|string',
+      'language'  => 'required|string',
+		);
+		$validator = Validator::make(Input::all(), $rules);
+
+    if ($validator->fails())
+    {
+			return Redirect::to('user/settings')->withErrors($validator)->withInput();
+		}
+    else
+    {
+      $user = User::find(Confide::User()->id);
+      
+      $user->email    = Input::get('email');
+      $user->timezone = Input::get('timezone');
+      $user->language = Input::get('language');
+
+	    $user->updateUniques();
+		}
+    
+    return Redirect::to('user/settings'); 
   }
 
 }

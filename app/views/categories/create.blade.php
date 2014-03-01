@@ -13,7 +13,7 @@
   		<div class="form-group">
         {{ Form::label('name', trans('common.title'), array('class' => 'sr-only col-sm-2')) }}
         <div class="col-sm-12">
-          {{ Form::text('name', Input::old('name'), array('class' => 'form-control', 'placeholder' => trans('common.title'))) }}
+          {{ Form::text('name', Input::old('name'), array('class' => 'form-control', 'placeholder' => trans('common.title'), 'required' => 'required', 'autofocus' => 'autofocus')) }}
         </div>
   		</div>
   

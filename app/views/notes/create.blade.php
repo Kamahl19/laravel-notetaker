@@ -13,14 +13,14 @@
   		<div class="form-group">               
         {{ Form::label('title', trans('common.title'), array('class' => 'sr-only col-sm-2')) }}
         <div class="col-sm-12">
-          {{ Form::text('title', Input::old('title'), array('class' => 'form-control', 'placeholder' => trans('common.title'))) }}
+          {{ Form::text('title', Input::old('title'), array('class' => 'form-control', 'placeholder' => trans('common.title'), 'required' => 'required', 'autofocus' => 'autofocus')) }}
         </div>
   		</div>
   
   		<div class="form-group">
         {{ Form::label('text', trans('common.text'), array('class' => 'sr-only col-sm-2')) }}
         <div class="col-sm-12">
-          {{ Form::textarea('text', Input::old('text'), array('class' => 'form-control', 'placeholder' => trans('common.text'), 'rows' => '3')) }}
+          {{ Form::textarea('text', Input::old('text'), array('class' => 'form-control', 'placeholder' => trans('common.text'), 'rows' => '3', 'required' => 'required')) }}
         </div>
   		</div>
 
@@ -28,7 +28,7 @@
         {{ Form::label('category', trans('common.category'), array('class' => 'col-sm-2 control-label')) }}
         <div class="col-sm-4">
           <div class="input-group">
-            {{ Form::select('category', $categories_select, Input::old('category'), array('class' => 'form-control')) }}
+            {{ Form::select('category', $categories_select, Input::old('category'), array('class' => 'form-control', 'required' => 'required')) }}
             <span class="input-group-btn">
               <a class="btn btn-default create-category" href="#" role="button"><span class="fa fa-plus fa-lg"></span></a>
             </span>

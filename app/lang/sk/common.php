@@ -52,6 +52,7 @@ return array(
   'language'                    => 'Jazyk',
   'change_password'             => 'Zmeniť heslo',
   'password_changed'            => 'Vaše heslo bolo úspešne zmenené.',
+  'password_not_changed'        => 'Toto heslo aktuálne používate.',
   'settings_changed'            => 'Vaše nastavenia boli úspešne uložené.',
   
   // Javascript

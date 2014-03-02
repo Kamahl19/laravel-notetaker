@@ -1,6 +1,19 @@
 <?php
 
 class UserController extends BaseController {
+            
+  protected $user;
+  
+  /**
+  * Inject the models.
+  * @param User $user  
+  */
+  public function __construct(User $user)
+  {
+    parent::__construct();
+    
+    $this->user = $user;
+  }
                   
   /**
    * Displays the form for account creation
@@ -259,12 +272,17 @@ class UserController extends BaseController {
       $user = User::find(Confide::User()->id);
       
       $password = Input::get('password');
-      $password_hashed = Hash::make($password);
       
       if ( Hash::check($password, $user->password) )
       {
-        $user->password = $password;
-        $user->updateUniques();
+        return Redirect::action('UserController@settings')
+                        ->with('notice', trans('common.password_not_changed'));
+      }
+      else
+      {
+        $hashed_password = Hash::make($password);
+        
+        $this->user->change_password(Confide::User()->id, $hashed_password);
         
         return Redirect::action('UserController@settings')
                         ->with('notice', trans('common.password_changed'));

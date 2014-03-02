@@ -52,6 +52,7 @@ return array(
   'language'                    => 'Language',
   'change_password'             => 'Change password',
   'password_changed'            => 'Your password has been changed succesfully.',
+  'password_not_changed'        => 'You are currently using this password.',
   'settings_changed'            => 'Settings has been changed succesfully.',
   
   // Javascript

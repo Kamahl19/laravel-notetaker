@@ -2,16 +2,20 @@
 
 class Functions {
 
-  public static function language_list()
+  public static function language_list($add_empty = false)
   {
-    $languages[''] = '';
     $languages['en'] = 'English';
     $languages['sk'] = 'Slovenčina';
+    
+    if ($add_empty)
+    {
+      $languages = array('' => '') + $languages;
+    }
     
     return $languages;
   }
 
-  public static function timezone_list()
+  public static function timezone_list($add_empty = false)
   {
     static $timezones = null;
 
@@ -31,7 +35,12 @@ class Functions {
       array_multisort($offsets, $timezones);
     }
 
-    return array('' => '') + $timezones;
+    if ($add_empty)
+    {
+      $timezones = array('' => '') + $timezones;
+    }
+    
+    return $timezones;
   }
   
   private static function format_GMT_offset($offset)

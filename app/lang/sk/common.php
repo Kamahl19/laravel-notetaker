@@ -54,6 +54,12 @@ return array(
   'password_changed'            => 'Vaše heslo bolo úspešne zmenené.',
   'password_not_changed'        => 'Toto heslo aktuálne používate.',
   'settings_changed'            => 'Vaše nastavenia boli úspešne uložené.',
+  'confirmation_sent'           => 'Na email vám boli zaslané inštrukcie na aktiváciu účtu.',
+  'can_login_now'               => 'Teraz sa môžete prihlásiť.',
+  'delete_account'              => 'Zmazať účet',
+  'delete_account_explain'      => 'Pri zmazaní vášho účtu sa zmažú aj všetky vaše poznámky. Táto zmena je trvalá a nedá sa vrátiť späť.',
+  'account_deleted'             => 'Váš účet bol úspešne zmazaný.',
+  'wrong_password'              => 'Nesprávne heslo',
   
   // Javascript
   'confirm_delete_note'         => 'Naozaj chcete zmazať túto poznámku?',

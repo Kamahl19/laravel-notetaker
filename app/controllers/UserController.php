@@ -41,8 +41,21 @@ class UserController extends BaseController {
 
     if ($user->id)
     {
+      $notice = trans('confide::confide.alerts.account_created');
+      
+      if ( !Config::get('confide::signup_confirm') )
+      {
+        $this->user->activate_automatically($user->id);
+        
+        $notice .= ' ' . trans('common.can_login_now'); 
+      }
+      else
+      {
+        $notice .= ' ' . trans('common.confirmation_sent'); 
+      }
+      
       return Redirect::action('UserController@login')
-                      ->with('notice', trans('confide::confide.alerts.account_created'));
+                      ->with('notice', $notice);
     }
     else
     {                     
@@ -289,5 +302,32 @@ class UserController extends BaseController {
       }
 		}
   }
+  
+  /**
+	 * Remove the specified resource from storage.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function destroy()
+	{
+    $user = User::find(Confide::User()->id);
+    
+    $password = Input::get('password');
+    
+    if ( Hash::check($password, $user->password) )
+    {
+      $this->user->delete_account($user->id);
+      
+      return Redirect::action('UserController@login')
+                      ->with('notice', trans('common.account_deleted'));
+    }
+    else
+    {
+      return Redirect::action('UserController@settings')
+                      ->withErrors(trans('common.wrong_password'));
+    }
+
+	}
 
 }

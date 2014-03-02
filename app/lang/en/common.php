@@ -51,9 +51,15 @@ return array(
   'timezone'                    => 'Timezone',
   'language'                    => 'Language',
   'change_password'             => 'Change password',
-  'password_changed'            => 'Your password has been changed succesfully.',
+  'password_changed'            => 'Your password has been changed successfully.',
   'password_not_changed'        => 'You are currently using this password.',
-  'settings_changed'            => 'Settings has been changed succesfully.',
+  'settings_changed'            => 'Settings has been changed successfully.',
+  'confirmation_sent'           => 'Please check your email for the instructions on how to confirm your account.',
+  'can_login_now'               => 'You can log in now.',
+  'delete_account'              => 'Delete account',
+  'delete_account_explain'      => 'Deleting your account will also delete all your notes. This change is permanent and can not be undone.',
+  'account_deleted'             => 'Your account has been deleted successfully.',
+  'wrong_password'              => 'Wrong password',
   
   // Javascript
   'confirm_delete_note'         => 'Are you sure you want to delete this note?',

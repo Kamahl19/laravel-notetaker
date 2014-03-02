@@ -19,6 +19,7 @@ Route::group(array('before' => 'auth'), function()
   Route::get('user/settings',                       'UserController@settings');
   Route::post('user/settings',                      array('as' => 'user.settings', 'uses' => 'UserController@do_settings'), function(){});
   Route::post('user/change_password',               array('as' => 'user.change_password', 'uses' => 'UserController@change_password'), function(){});
+  Route::post('user/delete',                        'UserController@destroy');
 });                
   
 Route::get( 'user/create',                 'UserController@create');

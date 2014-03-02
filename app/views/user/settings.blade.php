@@ -63,6 +63,7 @@
   		</div>
 
       {{ Form::hidden('_token', Session::getToken()) }}
+      {{ Form::hidden('route', URL::to('/')) }}
       
       <div class="form-group no-bottom-margin">
         {{ Form::label('', '', array('class' => 'control-label col-sm-2')) }}
@@ -72,7 +73,28 @@
   		</div>    
            
     {{ Form::close() }}
-  
+                  
+    <h4 >{{ trans('common.delete_account') }}</h4>
+    <p>{{ trans('common.delete_account_explain') }}</p>
+    
+    {{ Form::open(array('url' => 'user/delete', 'method' => 'POST', 'class' => 'form-horizontal' )) }}
+    
+      <div class="form-group">
+        {{ Form::label('password', trans('confide::confide.password'), array('class' => 'control-label col-sm-2')) }}
+        <div class="col-sm-10">
+          {{ Form::password('password', array('class' => 'form-control', 'id' => 'password', 'placeholder' => trans('confide::confide.password'))) }}
+        </div>
+  		</div>
+      
+      <div class="form-group no-bottom-margin">
+        {{ Form::label('', '', array('class' => 'control-label col-sm-2')) }}
+        <div class="col-sm-10">
+          {{ Form::submit(trans('common.delete_account'), array('class' => 'btn btn-danger btn-sm')) }} 
+        </div>
+  		</div>    
+           
+    {{ Form::close() }}
+    
   </div>
     
 @stop

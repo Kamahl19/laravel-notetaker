@@ -6,8 +6,15 @@ class BaseController extends Controller {
   {
     if ( Confide::user() )
     {
-      App::setLocale(Confide::user()->language);
-      Config::set('app.timezone', Confide::user()->timezone);
+      if ( Confide::user()->language )
+      {
+        App::setLocale(Confide::user()->language);
+      }
+      
+      if ( Confide::user()->timezone )
+      {
+        Config::set('app.timezone', Confide::user()->timezone);
+      }
     }    
   }
 

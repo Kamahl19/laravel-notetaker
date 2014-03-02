@@ -89,11 +89,11 @@ class AttachmentController extends \BaseController {
     {
       $path = $this->uploads_path . $attachment->folder . DIRECTORY_SEPARATOR;
       
-      unlink($path . $attachment->filename);  
+      @unlink($path . $attachment->filename);  
       
       if ( Functions::is_dir_empty($path) )
       {
-        rmdir($path);
+        @rmdir($path);
       } 
       
       Attachment::destroy($id);

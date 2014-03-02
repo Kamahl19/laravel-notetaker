@@ -171,6 +171,10 @@
   text-align: left;
 }
 
+.main-form h4 {
+  margin: 25px 0 15px 0;
+}
+
 .login-form .input-group {
   margin-top: 25px;
 }

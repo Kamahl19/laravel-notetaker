@@ -146,20 +146,21 @@ $(document).ready(function() {
   
   // Create category
   var catName = '';
-  var catForm = $('<div><input id="name" class="form-control" type="text" name="name" placeholder="' + trans.title + '" autofocus></div>');
+  var catForm = $('<div><input id="name" class="form-control" type="text" name="name" placeholder="' + trans.title + '"></div>');
   
   $(document).on("click", ".create-category", function() {
     BootstrapDialog.show({
       title: trans.new_category,
-      message: catForm,
+      message: catForm,   
       buttons: [{
         label: trans.cancel,
+        cssClass: 'btn-default btn-sm',
         action: function(dialog) {
           dialog.close();  
         }
       }, {
         label: trans.save,
-        cssClass: 'btn-primary',
+        cssClass: 'btn-primary btn-sm',
         action: function(dialog) {
           catName = $("#name").val();
 
@@ -192,6 +193,6 @@ $(document).ready(function() {
         }
       }]
     });  
-  });     
+  });
   
 });

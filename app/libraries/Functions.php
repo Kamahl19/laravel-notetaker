@@ -2,15 +2,10 @@
 
 class Functions {
 
-  public static function language_list($add_empty = false)
+  public static function language_list()
   {
     $languages['en'] = 'English';
     $languages['sk'] = 'Slovenčina';
-    
-    if ($add_empty)
-    {
-      $languages = array('' => '') + $languages;
-    }
     
     return $languages;
   }

@@ -48,7 +48,7 @@
       <div class="form-group">
         {{ Form::label('language', trans('common.language'), array('class' => 'control-label col-sm-2')) }}
         <div class="col-sm-10">
-          {{ Form::select('language', Functions::language_list(true), Input::old('language'), array('class' => 'form-control', 'required' => 'required')) }}
+          {{ Form::select('language', Functions::language_list(), Input::old('language'), array('class' => 'form-control', 'required' => 'required')) }}
         </div>
   		</div>
 

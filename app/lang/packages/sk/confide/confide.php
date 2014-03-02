@@ -31,7 +31,7 @@ return array(
   ),
 
   'alerts'  => array(
-    'account_created'         => 'Váš účet bol úspešne vytvorený. Na email vám boli zaslané inštrukcie na aktiváciu účtu.',      
+    'account_created'         => 'Váš účet bol úspešne vytvorený.',
     'too_many_attempts'       => 'Prekročili ste limit pokusov o registráciu. Skúste to opäť o niekoľko minút.',
     'wrong_credentials'       => 'Nesprávne užívateľské meno, email alebo heslo.',
     'not_confirmed'           => 'Váš účet nie je aktivovaný. Inštrukcie na aktiváciu vám boli zaslané na email.',

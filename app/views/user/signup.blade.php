@@ -4,17 +4,9 @@
         
   <div class="main-form">
   
-    @if ( Session::get('error') )
-      <div class="alert alert-danger">
-        @if ( is_array(Session::get('error')) )
-          {{ head(Session::get('error')) }}
-        @endif
-      </div>
-    @endif
-
-    @if ( Session::get('notice') )
-      <div class="alert">{{ Session::get('notice') }}</div>
-    @endif
+    @if( count($errors) > 0 )
+			<div class="alert alert-danger">{{ HTML::ul($errors->all()) }}</div>
+		@endif
                
     <form method="POST" action="{{{ (Confide::checkAction('UserController@store')) ?: URL::to('user')  }}}" class="form-horizontal" accept-charset="UTF-8">
     

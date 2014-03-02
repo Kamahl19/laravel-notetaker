@@ -4,14 +4,10 @@
         
   <div class="main-form">    
     
-    @if ( Session::get('error') )
-      <div class="alert alert-danger">{{{ Session::get('error') }}}</div>
-    @endif
+    @if( count($errors) > 0 )
+			<div class="alert alert-danger">{{ HTML::ul($errors->all()) }}</div>
+		@endif
 
-    @if ( Session::get('notice') )
-      <div class="alert">{{{ Session::get('notice') }}}</div>
-    @endif
-  
     <form method="POST" action="{{ (Confide::checkAction('UserController@do_forgot_password')) ?: URL::to('/user/forgot') }}" class="form-horizontal" accept-charset="UTF-8">
     
       <div class="form-group">

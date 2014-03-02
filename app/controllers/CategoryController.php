@@ -59,7 +59,9 @@ class CategoryController extends \BaseController {
       {
         return Response::json(array('status' => '0', 'msg' => $validator->messages()->toJson()));
       } 
-      return Redirect::to('categories/create')->withErrors($validator)->withInput();
+      return Redirect::to('categories/create')
+                      ->withErrors($validator)
+                      ->withInput();
 		}
     else
     {
@@ -117,7 +119,9 @@ class CategoryController extends \BaseController {
   
       if ($validator->fails())
       {
-  			return Redirect::to('categories/' . $id . '/edit')->withErrors($validator)->withInput();
+  			return Redirect::to('categories/' . $id . '/edit')
+                        ->withErrors($validator)
+                        ->withInput();
   		}
       else
       {

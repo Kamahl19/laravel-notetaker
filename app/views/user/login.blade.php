@@ -4,12 +4,12 @@
         
   <div class="login-form col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2">
   
-    @if ( Session::get('error') )
-      <div class="alert alert-danger">{{{ Session::get('error') }}}</div>
-    @endif
-
+    @if( count($errors) > 0 )
+			<div class="alert alert-danger">{{ HTML::ul($errors->all()) }}</div>
+		@endif
+    
     @if ( Session::get('notice') )
-      <div class="alert">{{{ Session::get('notice') }}}</div>
+      <div class="alert alert-info">{{{ Session::get('notice') }}}</div>
     @endif
                
     <form method="POST" action="{{{ Confide::checkAction('UserController@do_login') ?: URL::to('/user/login') }}}" class="form-horizontal" accept-charset="UTF-8">

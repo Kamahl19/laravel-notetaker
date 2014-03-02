@@ -8,6 +8,7 @@ return array(
   'toggle_navigation'           => 'Menu',
   'cancel'                      => 'Cancel',
   'ok'                          => 'OK',
+  'change'                      => 'Change',
   'date_format'                 => 'yy-m-d',
   'date_time_format'            => 'Y-m-d H:i',
     
@@ -49,6 +50,9 @@ return array(
   // User
   'timezone'                    => 'Timezone',
   'language'                    => 'Language',
+  'change_password'             => 'Change password',
+  'password_changed'            => 'Your password has been changed succesfully.',
+  'settings_changed'            => 'Settings has been changed succesfully.',
   
   // Javascript
   'confirm_delete_note'         => 'Are you sure you want to delete this note?',

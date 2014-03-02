@@ -17,7 +17,8 @@ Route::group(array('before' => 'auth'), function()
   Route::delete('attachments/{attachments}',        'AttachmentController@destroy');
   
   Route::get('user/settings',                       'UserController@settings');
-  Route::post('user/settings', array('as' => 'user.settings', 'uses' => 'UserController@do_settings'), function(){});
+  Route::post('user/settings',                      array('as' => 'user.settings', 'uses' => 'UserController@do_settings'), function(){});
+  Route::post('user/change_password',               array('as' => 'user.change_password', 'uses' => 'UserController@change_password'), function(){});
 });                
   
 Route::get( 'user/create',                 'UserController@create');

@@ -76,7 +76,9 @@ class NoteController extends \BaseController {
     
     if ($validator->fails())
     {                   
-			return Redirect::to('notes/create')->withErrors($validator)->withInput();
+			return Redirect::to('notes/create')
+                      ->withErrors($validator)
+                      ->withInput();
 		}
     else
     {

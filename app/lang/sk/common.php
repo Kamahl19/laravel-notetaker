@@ -8,6 +8,7 @@ return array(
   'toggle_navigation'           => 'Menu',
   'cancel'                      => 'Zrušiť',
   'ok'                          => 'OK',
+  'change'                      => 'Zmeniť',
   'date_format'                 => 'd.m.yy',
   'date_time_format'            => 'd.m.Y H:i',
     
@@ -49,6 +50,9 @@ return array(
   // User
   'timezone'                    => 'Časové pásmo',
   'language'                    => 'Jazyk',
+  'change_password'             => 'Zmeniť heslo',
+  'password_changed'            => 'Vaše heslo bolo úspešne zmenené.',
+  'settings_changed'            => 'Vaše nastavenia boli úspešne uložené.',
   
   // Javascript
   'confirm_delete_note'         => 'Naozaj chcete zmazať túto poznámku?',

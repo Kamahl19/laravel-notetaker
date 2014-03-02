@@ -7,7 +7,11 @@
     @if( count($errors) > 0 )
 			<div class="alert alert-danger">{{ HTML::ul($errors->all()) }}</div>
 		@endif
-               
+    
+    @if ( Session::get('notice') )
+      <div class="alert alert-info">{{{ Session::get('notice') }}}</div>
+    @endif
+    
     {{ Form::model($user, array('route' => array('user.settings'), 'method' => 'POST', 'class' => 'form-horizontal')) }}
     
       <div class="form-group">
@@ -16,22 +20,6 @@
           {{ Form::text('email', null, array('class' => 'form-control', 'id' => 'email', 'placeholder' => trans('confide::confide.e_mail'), 'required' => 'required')) }}
         </div>
   		</div>
-      
-      <!--
-      <div class="form-group">
-        {{ Form::label('password', trans('confide::confide.password'), array('class' => 'control-label col-sm-2')) }}
-        <div class="col-sm-10">
-          {{ Form::password('password', array('class' => 'form-control', 'id' => 'password', 'placeholder' => trans('confide::confide.password'))) }}
-        </div>
-  		</div>
-      
-      <div class="form-group">
-        {{ Form::label('password_confirmation', trans('confide::confide.password_confirmation'), array('class' => 'control-label col-sm-2')) }}
-        <div class="col-sm-10">
-          {{ Form::password('password_confirmation', array('class' => 'form-control', 'id' => 'password_confirmation', 'placeholder' => trans('confide::confide.password_confirmation'))) }}
-        </div>
-  		</div>
-      -->
       
       <div class="form-group">
         {{ Form::label('timezone', trans('common.timezone'), array('class' => 'control-label col-sm-2')) }}
@@ -47,12 +35,39 @@
         </div>
   		</div>
 
-      <!-- {{ Form::hidden('_token', Session::getToken()) }} -->
-      
       <div class="form-group no-bottom-margin">
         {{ Form::label('', '', array('class' => 'control-label col-sm-2')) }}
         <div class="col-sm-10">
           {{ Form::submit(trans('common.save'), array('class' => 'btn btn-primary btn-sm')) }} 
+        </div>
+  		</div>    
+           
+    {{ Form::close() }}
+    
+    <h4>{{ trans('common.change_password') }}</h4>
+    
+    {{ Form::model($user, array('route' => array('user.change_password'), 'method' => 'POST', 'class' => 'form-horizontal')) }}
+    
+      <div class="form-group">
+        {{ Form::label('password', trans('confide::confide.password'), array('class' => 'control-label col-sm-2')) }}
+        <div class="col-sm-10">
+          {{ Form::password('password', array('class' => 'form-control', 'id' => 'password', 'placeholder' => trans('confide::confide.password'))) }}
+        </div>
+  		</div>
+      
+      <div class="form-group">
+        {{ Form::label('password_confirmation', trans('confide::confide.password_confirmation'), array('class' => 'control-label col-sm-2')) }}
+        <div class="col-sm-10">
+          {{ Form::password('password_confirmation', array('class' => 'form-control', 'id' => 'password_confirmation', 'placeholder' => trans('confide::confide.password_confirmation'))) }}
+        </div>
+  		</div>
+
+      {{ Form::hidden('_token', Session::getToken()) }}
+      
+      <div class="form-group no-bottom-margin">
+        {{ Form::label('', '', array('class' => 'control-label col-sm-2')) }}
+        <div class="col-sm-10">
+          {{ Form::submit(trans('common.change'), array('class' => 'btn btn-primary btn-sm')) }} 
         </div>
   		</div>    
            

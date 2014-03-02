@@ -1,7 +1,7 @@
 <?php
 
 class UserController extends BaseController {
-
+                  
   /**
    * Displays the form for account creation
    */
@@ -32,12 +32,12 @@ class UserController extends BaseController {
                       ->with('notice', trans('confide::confide.alerts.account_created'));
     }
     else
-    {
+    {                     
       $error = $user->errors()->all(':message');
 
       return Redirect::action('UserController@create')
                       ->withInput(Input::except('password'))
-                      ->with('error', $error);
+                      ->withErrors($error);
     }
   }
 
@@ -79,20 +79,20 @@ class UserController extends BaseController {
       // Check if there was too many login attempts
       if ( Confide::isThrottled($input) )
       {
-        $err_msg = trans('confide::confide.alerts.too_many_attempts');
+        $error = trans('confide::confide.alerts.too_many_attempts');
       }
       else if ( $user->checkUserExists($input) && !$user->isConfirmed($input) )
       {
-        $err_msg = trans('confide::confide.alerts.not_confirmed');
+        $error = trans('confide::confide.alerts.not_confirmed');
       }
       else
       {
-        $err_msg = trans('confide::confide.alerts.wrong_credentials');
+        $error = trans('confide::confide.alerts.wrong_credentials');
       }
 
       return Redirect::action('UserController@login')
-                      ->withInput(Input::except('password'))
-                      ->with('error', $err_msg);
+                      ->withInput(Input::except('password')) 
+                      ->withErrors($error);
     }
   }
 
@@ -105,15 +105,15 @@ class UserController extends BaseController {
   {
     if ( Confide::confirm($code) )
     {
-      $notice_msg = trans('confide::confide.alerts.confirmation');
+      $notice = trans('confide::confide.alerts.confirmation');
       return Redirect::action('UserController@login')
-                      ->with('notice', $notice_msg);
+                      ->with('notice', $notice);
     }
     else
     {
-      $error_msg = trans('confide::confide.alerts.wrong_confirmation');
+      $error = trans('confide::confide.alerts.wrong_confirmation');
       return Redirect::action('UserController@login')
-                      ->with('error', $error_msg);
+                      ->withErrors($error);
     }
   }
 
@@ -132,16 +132,16 @@ class UserController extends BaseController {
   {
     if ( Confide::forgotPassword( Input::get('email') ) )
     {
-      $notice_msg = trans('confide::confide.alerts.password_forgot');
+      $notice = trans('confide::confide.alerts.password_forgot');
       return Redirect::action('UserController@login')
-                      ->with('notice', $notice_msg);
+                      ->with('notice', $notice);
     }
     else
     {
-      $error_msg = trans('confide::confide.alerts.wrong_password_forgot');
+      $error = trans('confide::confide.alerts.wrong_password_forgot');
       return Redirect::action('UserController@forgot_password')
                       ->withInput()
-                      ->with('error', $error_msg);
+                      ->withErrors($error);
     }
   }
 
@@ -167,16 +167,16 @@ class UserController extends BaseController {
 
     if( Confide::resetPassword($input) )
     {
-      $notice_msg = trans('confide::confide.alerts.password_reset');
+      $notice = trans('confide::confide.alerts.password_reset');
       return Redirect::action('UserController@login')
-                      ->with('notice', $notice_msg);
+                      ->with('notice', $notice);
     }
     else
     {
-      $error_msg = trans('confide::confide.alerts.wrong_password_reset');
+      $error = trans('confide::confide.alerts.wrong_password_reset');
       return Redirect::action('UserController@reset_password', array('token' => $input['token']))
                       ->withInput()
-                      ->with('error', $error_msg);
+                      ->withErrors($error);
     }
   }
 
@@ -205,18 +205,25 @@ class UserController extends BaseController {
   public function do_settings()
   {           
 		$rules = array(
-      'email'     => 'required|email|unique:users',
-      'timezone'  => 'required|string',
-      'language'  => 'required|string',
+      'timezone' => 'required',
+      'language' => 'required',
 		);
+    
+    if ( Confide::User()->email != Input::get('email') )
+    {
+      $rules['email'] = 'required|email|unique:users';
+    }
+    
 		$validator = Validator::make(Input::all(), $rules);
-
+    
     if ($validator->fails())
     {
-			return Redirect::to('user/settings')->withErrors($validator)->withInput();
+			return Redirect::to('user/settings')
+                      ->withInput(Input::except('email'))
+                      ->withErrors($validator);
 		}
     else
-    {
+    {    
       $user = User::find(Confide::User()->id);
       
       $user->email    = Input::get('email');
@@ -224,9 +231,45 @@ class UserController extends BaseController {
       $user->language = Input::get('language');
 
 	    $user->updateUniques();
+      
+      return Redirect::to('user/settings')
+                      ->with('notice', trans('common.settings_changed')); 
 		}
+  }
+  
+  /**
+   * Attempt change password of the user
+   */
+  public function change_password()
+  {           
+		$rules = array(
+      'password'              => 'required|min:4|confirmed',
+      'password_confirmation' => 'min:4',
+		);
     
-    return Redirect::to('user/settings'); 
+		$validator = Validator::make(Input::all(), $rules);
+    
+    if ($validator->fails())
+    {
+			return Redirect::action('UserController@settings')
+                      ->withErrors($validator);
+		}
+    else
+    {    
+      $user = User::find(Confide::User()->id);
+      
+      $password = Input::get('password');
+      $password_hashed = Hash::make($password);
+      
+      if ( Hash::check($password, $user->password) )
+      {
+        $user->password = $password;
+        $user->updateUniques();
+        
+        return Redirect::action('UserController@settings')
+                        ->with('notice', trans('common.password_changed'));
+      }
+		}
   }
 
 }

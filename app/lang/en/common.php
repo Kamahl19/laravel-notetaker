@@ -60,6 +60,7 @@ return array(
   'delete_account_explain'      => 'Deleting your account will also delete all your notes. This change is permanent and can not be undone.',
   'account_deleted'             => 'Your account has been deleted successfully.',
   'wrong_password'              => 'Wrong password',
+  'current_password'            => 'Current password',
   
   // Javascript
   'confirm_delete_note'         => 'Are you sure you want to delete this note?',

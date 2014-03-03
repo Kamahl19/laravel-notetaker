@@ -49,6 +49,13 @@
     {{ Form::model($user, array('route' => array('user.change_password'), 'method' => 'POST', 'class' => 'form-horizontal')) }}
     
       <div class="form-group">
+        {{ Form::label('current_password', trans('common.current_password'), array('class' => 'control-label col-sm-2')) }}
+        <div class="col-sm-10">
+          {{ Form::password('current_password', array('class' => 'form-control', 'id' => 'current_password', 'placeholder' => trans('common.current_password'))) }}
+        </div>
+  		</div>
+    
+      <div class="form-group">
         {{ Form::label('password', trans('confide::confide.password'), array('class' => 'control-label col-sm-2')) }}
         <div class="col-sm-10">
           {{ Form::password('password', array('class' => 'form-control', 'id' => 'password', 'placeholder' => trans('confide::confide.password'))) }}

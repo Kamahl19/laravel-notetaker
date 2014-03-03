@@ -60,6 +60,7 @@ return array(
   'delete_account_explain'      => 'Pri zmazaní vášho účtu sa zmažú aj všetky vaše poznámky. Táto zmena je trvalá a nedá sa vrátiť späť.',
   'account_deleted'             => 'Váš účet bol úspešne zmazaný.',
   'wrong_password'              => 'Nesprávne heslo',
+  'current_password'            => 'Aktuálne heslo',
   
   // Javascript
   'confirm_delete_note'         => 'Naozaj chcete zmazať túto poznámku?',

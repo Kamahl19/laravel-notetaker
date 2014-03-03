@@ -284,21 +284,31 @@ class UserController extends BaseController {
     {    
       $user = User::find(Confide::User()->id);
       
-      $password = Input::get('password');
+      $current_password = Input::get('current_password');
       
-      if ( Hash::check($password, $user->password) )
+      if ( Hash::check($current_password, $user->password) )
       {
-        return Redirect::action('UserController@settings')
-                        ->with('notice', trans('common.password_not_changed'));
+        $password = Input::get('password');
+        
+        if ( $current_password == $password )
+        {
+          return Redirect::action('UserController@settings')
+                          ->with('notice', trans('common.password_not_changed'));
+        }
+        else
+        {
+          $hashed_password = Hash::make($password);
+          
+          $this->user->change_password(Confide::User()->id, $hashed_password);
+          
+          return Redirect::action('UserController@settings')
+                          ->with('notice', trans('common.password_changed'));
+        }
       }
       else
       {
-        $hashed_password = Hash::make($password);
-        
-        $this->user->change_password(Confide::User()->id, $hashed_password);
-        
         return Redirect::action('UserController@settings')
-                        ->with('notice', trans('common.password_changed'));
+                        ->withErrors(trans('common.wrong_password'));
       }
 		}
   }

@@ -4,7 +4,6 @@ use Zizaco\Confide\ConfideUser;
 
 class User extends ConfideUser {
 
-  protected $table = 'users';
 	protected $guarded = array('id');
 	protected $fillable = array('username', 'email', 'password', 'confirmation_code', 'confirmed', 'created_at', 'updated_at', 'timezone', 'language');
                 

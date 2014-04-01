@@ -2,7 +2,6 @@
 
 class Category extends Eloquent {
 
-  protected $table = 'categories';
   protected $guarded = array('id');
 	protected $fillable = array('name', 'user_id'); 
   

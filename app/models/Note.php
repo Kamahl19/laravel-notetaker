@@ -2,7 +2,6 @@
 
 class Note extends Eloquent {
 
-  protected $table = 'notes';
 	protected $guarded = array('id');
 	protected $fillable = array('title', 'text', 'priority', 'category', 'deadline', 'finished', 'url', 'user_id');
   

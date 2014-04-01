@@ -2,7 +2,6 @@
 
 class Attachment extends Eloquent {
   
-  protected $table = 'attachments';
 	protected $guarded = array('id');
 	protected $fillable = array('note_id', 'folder', 'filename', 'filesize', 'user_id');
   

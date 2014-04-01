@@ -19,6 +19,7 @@
   {{ HTML::script('vendor/js/jquery-ui-timepicker-addon.min.js'); }}
   {{ HTML::script('vendor/js/bootstrap-dialog.min.js'); }}
   {{ HTML::script('vendor/js/dropzone.min.js') }}
+  {{ HTML::script('vendor/js/bootstrap-notify.js') }}
   {{ HTML::script('js/my-js.js'); }}
   
   <!--[if lt IE 9]>
@@ -28,26 +29,26 @@
   
   <script type="text/javascript">
     var trans = new Object();
-    trans.confirm_delete_note = "{{ trans('common.confirm_delete_note') }}";
+    trans.confirm_delete_note     = "{{ trans('common.confirm_delete_note') }}";
     trans.confirm_delete_category = "{{ trans('common.confirm_delete_category') }}";
-    trans.del = "{{ trans('common.delete') }}";
-    trans.cancel = "{{ trans('common.cancel') }}";
-    trans.upload_default_message = "{{ trans('common.upload_default_message') }}";
-    trans.confirm_cancel_upload = "{{ trans('common.confirm_cancel_upload') }}";
-    trans.upload_file_too_big = "{{ trans('common.upload_file_too_big') }}";
-    trans.download = "{{ trans('common.download') }}";
-    trans.deadline = "{{ trans('common.deadline') }}";
-    trans.time = "{{ trans('common.time') }}";
-    trans.hour = "{{ trans('common.hour') }}";
-    trans.minute = "{{ trans('common.minute') }}";
-    trans.now = "{{ trans('common.now') }}";
-    trans.ok = "{{ trans('common.ok') }}";
-    trans.date_format = "{{ trans('common.date_format') }}";
-    trans.title = "{{ trans('common.title') }}";
-    trans.new_category = "{{ trans('common.new_category') }}";
-    trans.save = "{{ trans('common.save') }}";
+    trans.del                     = "{{ trans('common.delete') }}";
+    trans.cancel                  = "{{ trans('common.cancel') }}";
+    trans.upload_default_message  = "{{ trans('common.upload_default_message') }}";
+    trans.confirm_cancel_upload   = "{{ trans('common.confirm_cancel_upload') }}";
+    trans.upload_file_too_big     = "{{ trans('common.upload_file_too_big') }}";
+    trans.download                = "{{ trans('common.download') }}";
+    trans.deadline                = "{{ trans('common.deadline') }}";
+    trans.time                    = "{{ trans('common.time') }}";
+    trans.hour                    = "{{ trans('common.hour') }}";
+    trans.minute                  =  "{{ trans('common.minute') }}";
+    trans.now                     = "{{ trans('common.now') }}";
+    trans.ok                      = "{{ trans('common.ok') }}";
+    trans.date_format             = "{{ trans('common.date_format') }}";
+    trans.title                   = "{{ trans('common.title') }}";
+    trans.new_category            = "{{ trans('common.new_category') }}";
+    trans.save                    = "{{ trans('common.save') }}";
     trans.category_exists_already = "{{ trans('common.category_exists_already') }}";
-    trans.create_category_error = "{{ trans('common.create_category_error') }}";
+    trans.create_category_error   = "{{ trans('common.create_category_error') }}";
   </script>
 </head>
   
@@ -73,10 +74,8 @@
         <div class="collapse navbar-collapse" id="top_menu">
           <ul class="nav navbar-nav navbar-right">    
             @if ( ! Auth::guest() )
-                @if (Request::segment(1) == 'notes')
-                  <li {{ Request::is('notes/create') ? 'class="active"' : '' }}><a href="{{ URL::to('notes/create') }}"><span class="fa fa-plus"></span> {{ trans('common.add_note') }}</a></li>
-                @endif
               @if (Request::segment(1) == 'notes')
+                <li {{ Request::is('notes/create') ? 'class="active"' : '' }}><a href="{{ URL::to('notes/create') }}"><span class="fa fa-plus"></span> {{ trans('common.add_note') }}</a></li>
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-folder"></span> {{ trans('common.categories') }}</a>
                   <ul class="dropdown-menu">
@@ -86,32 +85,13 @@
                     <li><a href="{{ URL::to('categories') }}"><span class="fa fa-wrench"></span> {{ trans('common.manage_categories') }}</a></li>
                   </ul>
                 </li>
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-sort"></span> {{ trans('common.order') }}</a>
-                  <ul class="dropdown-menu">
-                    <li><a href="#"><span class="fa fa-sort-alpha-asc"></span> {{ trans('common.title') }}</a></li>
-                    <li><a href="#"><span class="fa fa-sort-alpha-desc"></span> {{ trans('common.title') }}</a></li>
-                    <li><a href="#"><span class="fa fa-sort-numeric-desc"></span> {{ trans('common.priority') }}</a></li>
-                    <li><a href="#"><span class="fa fa-sort-numeric-asc"></span> {{ trans('common.priority') }}</a></li>
-                    <li><a href="#"><span class="fa fa-frown-o"></span> {{ trans('common.order_deadline_asc') }}</a></li>
-                    <li><a href="#"><span class="fa fa-smile-o"></span> {{ trans('common.order_deadline_desc') }}</a></li>
-                    <li><a href="#"><span class="fa fa-calendar-o"></span> {{ trans('common.order_time_asc') }}</a></li>
-                    <li><a href="#"><span class="fa fa-calendar-o"></span> {{ trans('common.order_time_desc') }}</a></li>
-                  </ul>
-                </li>
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-filter"></span> {{ trans('common.filter') }}</a>
-                  <ul class="dropdown-menu">
-                    <li><a href="#"><span class="fa fa-check-square-o"></span> {{ trans('common.filter_only_finished') }}</a></li>
-                    <li><a href="#"><span class="fa fa-cloud-download"></span> {{ trans('common.filter_only_with_attachment') }}</a></li>
-                  </ul>
-                </li>
               @elseif (Request::segment(1) == 'categories')
                 <li {{ Request::is('categories/create') ? 'class="active"' : '' }}><a href="{{ URL::to('categories/create') }}"><span class="fa fa-plus"></span> {{ trans('common.add_category') }}</a></li>
                 <li><a href="{{ URL::to('notes') }}"><span class="fa fa-list"></span> {{ trans('common.notes') }}</a></li>
               @elseif (Request::segment(1) == 'user')
                 
               @endif
+                <li {{ Request::is('team/create') ? 'class="active"' : '' }}><a href="{{ URL::to('team/create') }}"><span class="fa fa-plus"></span> {{ trans('common.add_team') }}</a></li>
                 <li {{ Request::is('user/settings') ? 'class="active"' : '' }}><a href="{{ URL::to('user/settings') }}"><span class="fa fa-cog"></span> {{ trans('common.settings') }}</a></li>
                 <li {{ Request::is('user/logout') ? 'class="active"' : '' }}><a href="{{ URL::to('user/logout') }}"><span class="fa fa-power-off"></span> {{ trans('confide::confide.logout') }}</a></li>
             @else
@@ -132,6 +112,7 @@
 		</div>
     
     <div class="footer">
+    	<!-- <div class="notifications bottom-left"></div> -->
       <p>&copy; 2014 <a href="mailto:kamahl19@gmail.com">Martin Litvaj</a></p>
     </div>
   

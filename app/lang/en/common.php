@@ -14,6 +14,7 @@ return array(
     
   // Menu
   'add_category'                => 'Add category',
+  'add_team'                    => 'Create team',
   'notes'                       => 'Notes',
   'settings'                    => 'Settings',
   'add_note'                    => 'Add note',
@@ -46,6 +47,7 @@ return array(
   'upload'                      => 'Upload',
   'finished'                    => 'Finished',
   'save'                        => 'Save',
+  'email'												=> 'Email',
   
   // User
   'timezone'                    => 'Timezone',

@@ -14,6 +14,7 @@ return array(
     
   // Menu
   'add_category'                => 'Pridať kategóriu',
+  'add_team'                    => 'Vytvoriť team',
   'notes'                       => 'Poznámky',
   'settings'                    => 'Nastavenia',
   'add_note'                    => 'Pridať poznámku',
@@ -46,6 +47,7 @@ return array(
   'upload'                      => 'Upload',
   'finished'                    => 'Hotovo',
   'save'                        => 'Uložiť',
+  'email'												=> 'Email',
   
   // User
   'timezone'                    => 'Časové pásmo',

@@ -11,6 +11,8 @@ Route::group(array('before' => 'auth'), function()
   
   Route::resource('categories',                     'CategoryController');    
   
+  Route::resource('team',                     'TeamController');    
+  
   Route::get('attachments/{attachments}',           'AttachmentController@get_attachments');
   Route::get('attachments/download/{attachments}',  'AttachmentController@download');
   Route::post('attachments/store',                  'AttachmentController@store');  

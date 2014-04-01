@@ -195,4 +195,16 @@ $(document).ready(function() {
     });  
   });
   
+  // Display notification
+  /*
+  $('.bottom-left').notify({
+  	type: 'info',
+  	fadeOut: { enabled: false },
+    message: { text: 'Aw yeah, It works!' },
+    onClosed: function() {
+			
+		}
+  }).show();  
+	*/             
+  
 });

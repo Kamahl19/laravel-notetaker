@@ -49,7 +49,7 @@ class CategoryController extends \BaseController {
 	public function store()
 	{
     $rules = array(
-      'name' => 'required|unique:categories',
+      'name' => 'required|unique:categories,name,NULL,id,user_id,'.Confide::user()->id,
 		);
 		$validator = Validator::make(Input::all(), $rules);
     
